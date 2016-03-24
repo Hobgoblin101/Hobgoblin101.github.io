@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Asteroids</title>
+	<script>
+		function rand(floor, ceil){
+			return Math.floor( (Math.random() * (ceil-floor)) +floor);
+		};
+	</script>
+</head>
+<body style="margin: 0px; padding: 0px">
+	<canvas id="gameCanvas" width="640" height="480" style="margin: 0px; padding: 0px">
+		This is displayed if your browser does not support HTML 5
+	</canvas>
+
+	<!--Setup Page info for javascript-->
+	<script>
+	var canvas = document.getElementById("gameCanvas");
+	var context = canvas.getContext("2d");
+	</script>
+</body>
+
+<script>
+	function run(){
+		context.fillStyle = "rgb(" + rand(0,255) + ', ' + rand(0,255) + ', ' + rand(0,255) + ")";
+		context.fillRect(0, 0, canvas.width, canvas.height);
+	}
+	/**On Window Resize**/
+	function EventResize() {
+			SCREEN_WIDTH = window.innerWidth - 0;
+			SCREEN_HEIGHT = window.innerHeight - 3.5;
+			canvas.height = SCREEN_HEIGHT;
+			canvas.width = SCREEN_WIDTH;
+	};
+	window.addEventListener("resize", function () { EventResize(); }, false);
+	EventResize();
+
+	//-------------------- Don't modify anything below here
+	// This code will set up the framework so that the 'run' function is
+	// called 60 times per second. We have some options to fall back on
+	// in case the browser doesn't support our preferred method.
+	(function () {
+			var onEachFrame;
+			if (window.requestAnimationFrame) {
+					onEachFrame = function (cb) {
+							var _cb = function () { cb(); window.requestAnimationFrame(_cb); }
+							_cb();
+					};
+			} else if (window.mozRequestAnimationFrame) {
+					onEachFrame = function (cb) {
+							var _cb = function () { cb(); window.mozRequestAnimationFrame(_cb); }
+							_cb();
+					};
+			} else {
+					onEachFrame = function (cb) {
+							setInterval(cb, 1000 / MAXFRAMECOUNT);
+					}
+			}
+			window.onEachFrame = onEachFrame;
+	})();
+	window.onEachFrame(run);
+</script>
+
+
+</html>
