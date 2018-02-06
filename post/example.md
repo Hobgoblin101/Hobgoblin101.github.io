@@ -1,16 +1,5 @@
-# Hello World
-This is **me**, *examples*  
-New Line~~ deleted~~
+## Equations
 
-
-New Paragraph
-[**link**](/)
-```javascript
-//comment here return true
-function (){
-  let t = TRUE;
-  return true == 23.4 << 3
-}
+```math
+(1) \ (33) * (2)^(64) / 2
 ```
-
-## Secondary Title

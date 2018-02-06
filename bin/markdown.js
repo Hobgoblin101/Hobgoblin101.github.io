@@ -24,12 +24,9 @@ function Encode(input){
 
         break;
       case ' ': // New line
-        if (input[1] == ' '){
+        if (input[1] == ' ' && input[2] == '\n'){
           res += '<br>';
-          input = input.slice(2);
-        }else{
-          res += input[0];
-          input = input.slice(1);
+          input = input.slice(3);
         }
 
         break;
@@ -126,11 +123,13 @@ function Encode(input){
           input = input.slice(3);
           i = input.indexOf('```');
 
-          if (i > 0){
-            res += `<code>${code.encode(input.slice(0, i))}</code>`;
-            input = input.slice(i);
-            break;
+          if (i < 1){
+            i = input.length;
           }
+
+          res += code.encode(input.slice(0, i));
+          input = input.slice(i+3);
+          break;
         }
       default:
         res += input[0];
@@ -138,7 +137,6 @@ function Encode(input){
     }
   }
 
-  // fs.writeFileSync('./../p/'+path+'.html', res, 'utf8');
   return res;
 }
 

@@ -41,6 +41,7 @@ h6{
   color: #6a737d;
 }
 
+/*Ensure that the old HTML tags work*/
 del{
   text-decoration: line-through;
 }
@@ -88,4 +89,46 @@ code .lit{
 }
 code .pun{
   color: #f8f8f0;
+}
+
+
+code[type="eq"]{
+  font-size: 16px;
+}
+code[type="eq"] .row{
+  display: flex;
+}
+code[type="eq"] .row * {
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+code[type="eq"] .pow{
+  display: inline-block;
+}
+code[type="eq"] .pow .base{
+  display: inline-block;
+}
+code[type="eq"] .pow .exp{
+  position: relative;
+  top: -6px;
+
+  font-size: 10px;
+}
+
+code[type="eq"] .fract{
+  display: inline-block;
+
+  font-size: 10px;
+  text-align: center;
+}
+code[type="eq"] .fract .top{
+  display: block;
+
+  padding: 0px 4px;
+
+  border-bottom: solid white 1px;
+}
+code[type="eq"] .fract .bot{
+  display: block;
 }
