@@ -33,7 +33,7 @@ function encode(input){
 
     return `<code>${res}</code>`
   }else if (type == 'math'){
-    return '<code type="eq">'+math.encode(input.replace(/</g, '&lt').replace(/>/g, '&gt'))+'</code>';
+    return '<code type="eq">'+math.encode(input)+'</code>';
   }
 
   let res = input.slice(i+1, -1)

@@ -15,14 +15,12 @@ function encode(input){
         continue scan;
       case ')':
         dep -= 1;
-        continue;
+        continue scan;
     }
 
     if (dep !== 0){
       continue scan;
     }
-
-    console.log('current level', input[i]);
 
     switch (input[i]){
       case '\\':
@@ -80,7 +78,7 @@ function encode(input){
 
         insert = `<span class="fract"><span class="top">${encode(input.slice(a, b))}</span><span class="bot">${encode(input.slice(c, d))}</span></span>`;
         input = input.slice(0, a-1) + insert + input.slice(d+1);
-        i += insert.length - (i-a);
+        i = a + insert.length-2;
 
         continue scan;
     
@@ -138,17 +136,60 @@ function encode(input){
 
         insert = `<span class="pow"><span class="base">${encode(input.slice(a, b))}</span><span class="exp">${encode(input.slice(c, d))}</span></span>`;
         input = input.slice(0, a-1) + insert + input.slice(d+1);
-        i += insert.length - (i-a);
+        i = a + insert.length-2;
 
         continue scan;    
 
       case '/':
-        input[i] = '÷'
+        input = input.slice(0,i) + '<span class="opper">÷</span>' + input.slice(i+1);
+        i += 27;
         continue scan;
       case '*':
-        input[i] = '×'
+        input = input.slice(0,i) + '<span class="opper">×</span>' + input.slice(i+1);
+        i += 27;
         continue scan;
+      case '+':
+        input = input.slice(0,i) + '<span class="opper">+</span>' + input.slice(i+1);
+        i += 27;
+        continue scan;
+      case '-':
+        input = input.slice(0,i) + '<span class="opper">-</span>' + input.slice(i+1);
+        i += 27;
+        continue scan;
+      case '%':
+        input = input.slice(0,i) + '<span class="opper">%</span>' + input.slice(i+1);
+        i += 27;
+        continue scan;
+      case '&':
+        input = input.slice(0,i) + '<span class="opper">&</span>' + input.slice(i+1);
+        i += 27;
+        continue scan;
+      case '=':
+        input = input.slice(0,i) + '<span class="opper">÷</span>' + input.slice(i+1);
+        i += 27;
+        continue scan;
+      case '!':
+        input = input.slice(0,i) + '<span class="opper">÷</span>' + input.slice(i+1);
+        i += 27;
+        continue scan;
+      case '<':
+        input = input.slice(0,i) + '<span class="opper">&gt</span>' + input.slice(i+1);
+        i += 29;
+        continue scan;
+      case '>':
+        input = input.slice(0,i) + '<span class="opper">&lt</span>' + input.slice(i+1);
+        i += 29;
+        continue scan;
+      case ' ':
+        input = input.slice(0, i) + input.slice(i+1);
+        i--;
+        continue;
     }
+
+    // Must be a number / or algebra
+    input = input.slice(0,i) + '<span class="char">'+input[i]+'</span>' + input.slice(i+1);
+    i += 26;
+    continue scan;
   }
 
   return input;

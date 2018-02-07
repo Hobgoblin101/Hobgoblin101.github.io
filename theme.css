@@ -103,6 +103,18 @@ code[type="eq"] .row * {
   margin-bottom: auto;
 }
 
+code[type="eq"] .opper{
+  display: inline-block;
+  font-size: 16px;
+
+  margin-left: 5px;
+  margin-right: 5px;
+}
+
+code[type="eq"] .char{
+  display: inline-block;
+}
+
 code[type="eq"] .pow{
   display: inline-block;
 }
