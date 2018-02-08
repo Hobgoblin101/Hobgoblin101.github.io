@@ -52,6 +52,11 @@ i{
   font-style: italic;
 }
 
+break{
+  display: block;
+  border-bottom: #e1e4e8 2px solid;
+}
+
 
 
 

@@ -1,146 +1,279 @@
+'use strict';
+
 let code = require('./code.js');
 
-function Encode(input){
-  input = input.replace(/\r\n/g, '\n');
-  let count = 0;
-  let res = '';
-  let i = 0;
+function encode(input,nested){
+  var t = input.replace(/\r\n/g, '\n'); //Remove OS obscurities
+  
+  // Raised working values
+  var insert = '';
+  var count = 0;
 
-  outer:
-  while (input.length > 0){
-    switch (input[0]){
-      case '#': // Title
-        count = 0;
-        i = 0;
-        while (input[i] == '#'){
-          count ++;
-          i++;
+  //Raised Pointers
+  var a=0;
+  var b=0;
+  var c=0;
+  var d=0;
+
+  scan:
+  for (let i=0; i<t.length; i++){
+    // Title
+    if (t[i] == '#'){
+      
+      // Find the number of #s in a row
+      search:
+      for (a=i+1; a<t.length; a++){
+        if (t[a] != '#'){
+          break search;
         }
-        let e = input.indexOf('\n');
-        let title = input.slice(i+1, e);
+      }
 
-        res += `</p><h${count}>${title}</h${count}><p>`;
-        input = input.slice(e+1);
+      // Valid header tags end with a space
+      if (t[a] == ' '){
+        count = a-i;
 
-        break;
-      case ' ': // New line
-        if (input[1] == ' ' && input[2] == '\n'){
-          res += '<br>';
-          input = input.slice(3);
+        // Find the end of the line
+        search:
+        for (b=a+1; b<t.length; b++){
+          if (t[b] == '\n'){
+            break search;
+          }
         }
 
-        break;
-      case '*': // Bold / Italics
-        let bold = input[1] === '*';
-        i=0;
+        insert = `</p><h${count}>${encode(t.slice(a+1, b), true)}</h${count}><p>`;
+        t = t.slice(0, i) + insert + t.slice(b);
+        i += insert.length-1; // Do not rescan the data
 
-        if (bold){
-          input = input.slice(2);
-        }else{
-          input = input.slice(1);
+        continue scan;
+      }
+    }
+    
+    // New Paragraph
+    if (i > 1 && t.slice(i, i+2) == '\n\n'){
+      t = t.slice(0, i) + '</p><p>' + t.slice(i+1);
+      i += 6; //insert.length - 1
+
+      continue scan;
+    }
+    
+    // New Line
+    if (t.slice(i, i+3) == '  \n'){
+      insert = '<br>';
+      t = t.slice(0, i) + insert + t.slice(i+2);
+      i += insert.length-1;  // Do not rescan the data
+
+      continue scan;
+    }
+    
+    // Bold
+    if (t.slice(i, i+2) == '**'){
+      a = i+2;
+
+      // Find the end of the tag (only consuping the last of a set of ***s)
+      let found = false;
+      search:
+      for (b=a; b<t.length; b++){
+        if (found && t[b+1] != '*'){
+          b -= 1;
+          break search;
         }
+
+        if (t[b] == '\n'){ // Invalid Bolding
+          b = -1;
+          break search;
+        }else if (t[b] == '*' && t[b+1] == '*'){
+          found = true;
+        }
+      }
+
+      // Valid bolding
+      if (b != -1){
+        insert = `<b>${encode(t.slice(a, b), true)}</b>`;
+        t = t.slice(0, i) + insert + t.slice(b+2);
+        i += insert.length-1;  // Do not rescan the data
+
+        continue scan;
+      }
+    }
+
+    // Italics
+    if (t[i] == '*'){
+      a = i+1;
+
+      // Find the end of the tag
+      search:
+      for (b=a+1; b<t.length; b++){
+        if(t[b] == '\n'){ // Invalid Italics
+          b = -1;
+          break search;
+        }else if (t[b] == '*'){
+          break search;
+        }
+      }
+
+      // Valid Italics
+      if (b != -1){
+        insert = `<i>${encode(t.slice(a, b), true)}</i>`;
+        t = t.slice(0, i) + insert + t.slice(b+1);
+        i += insert.length-1;  // Do not rescan the data
+
+        continue scan;
+      }
+    }
+
+    // Strike Through
+    if (t[i] == '~' && t[i] == '~'){
+      a = i+1;
+
+      search:
+      for (b=a+1; b<t.length; b++){
+        if(t[b] == '\n'){
+          b = -1;
+          break search;
+        }else if (t[b] == '~' && t[b+1] == '~'){
+          break search;
+        }
+      }
+
+      // Valid strike though
+      if (b != -1){
+        insert = `<del>${encode(t.slice(a+1, b), true)}</del>`;
+        t = t.slice(0, i) + insert + t.slice(b+2);
+        i += insert.length-1;
+
+        continue scan;
+      }
+    }
+
+    // Section Break
+    if (t.slice(i, i+5) == '\n---\n'){
+      insert = `</p><break/><p>`;
+      t = t.slice(0,i) + insert + t.slice(i+4);
+      i += insert.length-1;
+
+      continue scan;
+    }
+
+    // Link
+    if (t[i] == '['){
+      /*
+        Find all key points (a,b,c,d)=>('[',']','(',')')
+        Invalid link if it is not all on this line
+      */
+      a = i;
+
+      search:
+      for (b=a; b<t.length; b++){
+        if (t[b] == ']'){
+          break search;
+        }else if (t[b] == '\n'){
+          b = -1;
+          break;
+        }
+      }
+
+      c = -1;
+      if (t[b+1] == '('){
+        c = b+1;
+      }
+
+      if (b != -1 && c != -1){
 
         search:
-        for (i=0; i<input.length; i++){
-          if (input[i] == '\\'){
-            i++;
-            continue search;
-          }
-
-          if (input[i] === '*'){
-            if (bold){
-              if (input[i+1] === '*'){
-                break;
-              }else{
-                continue search;
-              }
-            }else{
-              break;
-            }
+        for (d=c; d<t.length; d++){
+          if (t[d] == ')'){
+            break search;
+          }else if (t[d] == '\n'){
+            d = -1;
+            break search;
           }
         }
 
-        if (bold){
-          res += '<b>'+Encode(input.slice(0,i))+'</b>';
-          input = input.slice(i+2);
-        }else{
-          res += '<i>'+Encode(input.slice(0,i))+'</i>';
-          input = input.slice(i+1);
+        if (d != -1){
+          insert = `<a href="${t.slice(c+1, d)}">${encode(t.slice(a+1,b), true)}</a>`;
+          t = t.slice(0, i) + insert + t.slice(d+1);
+          i += insert.length;
+
+          continue scan;
         }
+      }
+    }
 
-        break;
-      case '~': // Strike Though
-        if (input[1] == '~'){
-          input = input.slice(2);
-          i=0;
+    // Image
+    if (t[i] == '!' && t[i+1] == '['){
+      /*
+        Find all key points (a,b,c,d)=>('[',']','(',')')
+        Invalid link if it is not all on this line
+      */
+      a = i+1;
 
-          search:
-          for (i=0; i<input.length; i++){
-            if (input[i] == '\\'){
-              i++;
-              continue search;
-            }
-
-            if (input[i] === '~'){
-              if (input[i+1] === '~'){
-                break search;
-              }else{
-                continue search;
-              }
-            }
-          }
-
-          res += '<del>'+Encode(input.slice(0,i))+'</del>';
-          input = input.slice(i+2);
+      search:
+      for (b=a; b<t.length; b++){
+        if (t[b] == ']'){
+          break search;
+        }else if (t[b] == '\n'){
+          b = -1;
           break;
         }
-      case '\n': // New Paragraph
-        if (input[1] == '\n'){
-          res += '</p><p>';
-          input = input.slice(3);
-        }else{
-          res += input[0];
-          input = input.slice(1);
-        }
+      }
 
-        break;
-      case '[': // Link
-        let a = input.indexOf(']');
-        let b = input.indexOf('(');
-        let c = input.indexOf(')');
+      c = -1;
+      if (t[b+1] == '('){
+        c = b+1;
+      }
 
-        if (a == -1 || b > c){
-          continue outer;
-        }
+      if (b != -1 && c != -1){
 
-        res += `<a href="${input.slice(b+1, c)}">${Encode(input.slice(1, a))}</a>`;
-        input = input.slice(c+1);
-
-        break;
-      case '`':
-        i = input.indexOf('```');
-        if (i === 0){
-          input = input.slice(3);
-          i = input.indexOf('```');
-
-          if (i < 1){
-            i = input.length;
+        search:
+        for (d=c; d<t.length; d++){
+          if (t[d] == ')'){
+            break search;
+          }else if (t[d] == '\n'){
+            d = -1;
+            break search;
           }
-
-          res += code.encode(input.slice(0, i));
-          input = input.slice(i+3);
-          break;
         }
-      default:
-        res += input[0];
-        input = input.slice(1);
+
+        if (d != -1){
+          insert = `<img href="${t.slice(c+1, d)}" alt="${t.slice(a+1,b)}" />`;
+          t = t.slice(0, i) + insert + t.slice(d+1);
+          i += insert.length;
+
+          continue scan;
+        }
+      }
+    }
+
+    // Snippet
+    if (t.slice(i, i+3) == '```'){
+      a = i+3;
+
+      // Find the end of the snippet
+      search:
+      for (b=a; b<t.length; b++){
+        if (t.slice(b, b+3) === '```'){
+          break search;
+        }
+      }
+
+      insert = code.encode(t.slice(a, b));
+      t = t.slice(0, i) + insert + t.slice(b+3);
+      i += insert.length-1;
     }
   }
 
-  return res;
+  if (!nested){
+    // Bake content into a paragraph
+    t = '<p>'+t+'</p>';
+
+    // If the input starts with a header causing a leading blank paragraph
+    if (t.slice(0, 7) == '<p></p>'){
+      t = t.slice(7);
+    }
+  }
+
+  return t;
 }
 
 
-module.exports = {
-  encode: Encode
-}
+module.exports = {encode};

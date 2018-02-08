@@ -1,5 +1,5 @@
-## Equations
-
-```math
-((1)\(2))\(8)*(3)^(4)/5>64
+```
+Select *
+From People
+Where People.state == "NSW"
 ```

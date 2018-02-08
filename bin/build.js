@@ -8,7 +8,7 @@ function Compile(article){
   let data = fs.readFileSync('./../post/'+article+'.md').toString();
   data = markdown.encode(data);
 
-  data = `<head>${header}</head><body><p>${data}</p></body><footer>${footer}</footer>`;
+  data = `<head>${header}</head><body>${data}</body><footer>${footer}</footer>`;
 
   fs.writeFileSync('./../p/'+article+'.html', data, 'utf8');
 }

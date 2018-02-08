@@ -27,7 +27,7 @@ function encode(input){
   let type = input.slice(0, i);
   input = input.slice(i+1);
 
-  if (type == '' || type == 'plain'){
+  if (type == 'plain'){
     let res = input.replace(/</g, '&lt').replace(/>/g, '&gt') // Encode <, >
       .replace(/\n/g, '<br>').replace(/ /g, '&nbsp').replace(/\t/g, '&nbsp&nbsp'); // Encode tabs and spaces
 
@@ -36,7 +36,7 @@ function encode(input){
     return '<code type="eq">'+math.encode(input)+'</code>';
   }
 
-  let res = input.slice(i+1, -1)
+  let res = input.slice(i, -1)
     .replace(/</g, '&lt').replace(/>/g, '&gt') // Encode <, >
     .replace(/\n/g, '<br>').replace(/ /g, '&nbsp').replace(/\t/g, '&nbsp&nbsp'); // Encode tabs and spaces
   let j;
