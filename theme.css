@@ -75,6 +75,36 @@ blockquote{
 
 
 
+table{
+  margin-top: 0px;
+  margin-bottom: 0px;
+
+  border-spacing: 0;
+  border-collapse: collapse;
+
+  box-sizing: border-box;
+}
+table tr{
+  background-color: #ffffff;
+  border-top: 1px solid #c6cbd1;
+
+  box-sizing: border-box;
+}
+table tr th{
+  font-weight: 600;
+  background-color: #ffffff;
+}
+table tr th, table tr td{
+  padding: 6px 13px;
+  border: 1px solid #dfe2e5;
+}
+table tr:nth-child(2n){
+  background-color: #f6f8fa;
+}
+
+
+
+
 
 code{
   background-color: #272822;
@@ -111,46 +141,35 @@ code .pun{
 }
 
 
+
 code[type="eq"]{
   font-size: 16px;
 }
 
-code[type="eq"] sub{
-  font-size: 14px;
+code[type="eq"] *{
+  display: inline-block;
 }
-code[type="eq"] sup{
+
+code[type="eq"] sub, code[type="eq"] sup{
   font-size: 14px;
 }
 
 code[type=eq] .sqrt{
-  border-top: white 1px solid;
+  border-top: #f8f8f0 1px solid;
 }
 
 code[type="eq"] .opper{
-  display: inline-block;
   font-size: 18px;
 
   margin-left: 5px;
   margin-right: 5px;
 }
 
-code[type="eq"] .char{
-  display: inline-block;
-}
-
-code[type=eq] .pow{
-  display: inline-block;
-}
-code[type=eq] .pow .base{
-  display: inline-block;
-}
 code[type=eq] .pow sup{
   font-size: 12px;
 }
 
 code[type=eq] .fract{
-  display: inline-block;
-
   font-size: 10px;
   text-align: center;
 }

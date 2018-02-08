@@ -1,9 +1,3 @@
-'use strict';
-
-
-
-
-
 let code = require('./code.js');
 
 
@@ -72,6 +66,22 @@ function encode(input,nested){
       i += insert.length;
 
       continue scan;
+    }
+
+    // Table
+    if (t[i] == '\n' && t[i+1] == '|'){
+      a = i+1;
+
+      search:
+      for (b=a; b<t.length; b++){
+        if (t[b] == '\n' && t[b+1] == '\n'){
+          break search;
+        }
+      }
+
+      insert = table(t.slice(a, b));
+      t = t.slice(0, i) + insert + t.slice(b);
+      i += insert.length -1 ;
     }
     
     // New Paragraph
@@ -406,6 +416,98 @@ function list(t){
   t = comp(t, d);
 
   return t;
+}
+
+
+
+
+function table(t){
+  let item = t.split('\n');
+  let res = '';
+
+  // Split the items in to rows and columns
+  for (let i=0; i<item.length; i++){
+    item[i] = item[i].split('|');
+
+    if (item[i][0] == ''){
+      item[i].splice(0, 1);
+    }
+    if (item[i][item[i].length-1] == ''){
+      item[i].splice(item[i].length-1, 1);
+    }
+  }
+
+
+  // Strip trailing and leading spaces on items
+  for (var y=0; y<item.length; y++){
+    for (let x=0; x<item[y].length; x++){
+
+      // Find start
+      search:
+      for (var a=0; a<item[y][x].length; a++){
+        if (item[y][x][a] != ' '){
+          break search;
+        }
+      }
+
+      // Find end
+      search:
+      for (var b=item[y][x].length; b>=0; b--){
+        if (item[y][x][b] != ' '){
+          break search;
+        }
+      }
+
+      item[y][x] = item[y][x].slice(a, b);
+    }
+  }
+
+
+  // Setup alignment
+  y=1;
+  for (var x=0; x<item[y].length; x++){
+    let align = 0;
+    if (item[y][x][0] == ':'){
+      align --;
+    }
+    if (item[y][x][item[y][x].length-1] == ':'){
+      align += 1;
+    }
+
+    switch (align){
+      case -1:
+        item[y][x] = 'left';
+        break;
+      case 0:
+        item[y][x] = 'center';
+        break;
+      case 1:
+        item[y][x] = 'right';
+        break;
+    }
+
+    
+  }
+
+
+  // Define table headers
+  res += '<tr>';
+  for (let x=0; x<item[0].length; x++){
+    res += `<th>${item[0][x]}</th>`;
+  }
+  res += '</tr>';
+
+
+  // Compile table data
+  for (let y=2; y<item.length; y++){
+    res += '<tr>';
+    for (let x=0; x<item[y].length; x++){
+      res += `<td style="text-align:${item[1][x]};">${item[y][x]}</td>`;
+    }
+    res += '</tr>';
+  }
+
+  return `<table>${res}</table`;
 }
 
 
