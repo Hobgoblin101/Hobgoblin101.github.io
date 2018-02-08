@@ -57,6 +57,20 @@ break{
   border-bottom: #e1e4e8 2px solid;
 }
 
+blockquote{
+  font-family: "Segoe UI",Helvetica,Arial,sans-serif;
+  word-wrap: break-word;
+  line-height: 1.5;
+  font-size: 16px;
+
+  padding: 0px 16px;
+  color: #6a737d;
+  border-left: 0.25em solid #dfe2e5;
+
+  margin: 0px;
+  margin-bottom: 16px;
+}
+
 
 
 

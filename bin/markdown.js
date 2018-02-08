@@ -260,6 +260,29 @@ function encode(input,nested){
       t = t.slice(0, i) + insert + t.slice(b+3);
       i += insert.length-1;
     }
+
+    // Quote
+    if (t.slice(i, i+3) == '\n> '){
+      insert = '';
+      a = i;
+
+      while (t[a] == '\n' && t[a+1] == '>' && t[a+2] == ' '){
+        search:
+        for (b=a+3; b<t.length; b++){
+          if (t[b] == '\n'){
+            break search;
+          }
+        }
+
+        insert += t.slice(a+3, b)+'<br>';
+
+        a = b;
+      }
+
+      insert = `</p><blockquote>${encode(insert)}</blockquote><p>`;
+      t = t.slice(0,i) + insert + t.slice(b+1);
+      i += insert.length;
+    }
   }
 
   if (!nested){
