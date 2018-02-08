@@ -1,6 +1,14 @@
 'use strict';
 
+
+
+
+
 let code = require('./code.js');
+
+
+
+
 
 function encode(input,nested){
   var t = input.replace(/\r\n/g, '\n'); //Remove OS obscurities
@@ -46,6 +54,24 @@ function encode(input,nested){
 
         continue scan;
       }
+    }
+
+    // List
+    if (t[i] == '\n' && (t.slice(i+1, i+3) == '* ' || t.slice(i+1, i+4) == '1. ')){
+      a = i+1;
+
+      search:
+      for (b=a+1; b<t.length; b++){
+        if (t[b] == '\n' && t[b+1] == '\n'){
+          break search;
+        }
+      }
+
+      insert = list(t.slice(a, b));
+      t = t.slice(0, i) + insert + t.slice(b);
+      i += insert.length;
+
+      continue scan;
     }
     
     // New Paragraph
@@ -297,6 +323,92 @@ function encode(input,nested){
 
   return t;
 }
+
+
+
+
+
+function list(t){
+  t = t.split('\n');
+  let d = [];
+
+  // Split lines into their own depth
+  scan:
+  for (let i=0; i<t.length; i++){
+
+    // Find the indentation
+    search:
+    for (var j=0; j<t[i].length; j++){
+      if (t[i][j] != ' '){
+        break search;
+      }
+    }
+
+    // Reached the end of the row it must be invalid
+    if (j == t[i].length){
+      j == -1;
+    }
+
+    // It must be a continuation of the previous item
+    if (j === -1){
+      t[i-1] += '\n'+t[i];
+      t.splice(i, 1);
+      i--;
+      continue scan;
+    }
+
+    // This item has it's own depth
+    t[i] = t[i].slice(j); // Remove the leading spaces
+    d[i] = j;
+  }
+
+  let comp = (item, depth)=>{
+    let ordered = item[0][0] == '1';
+    let d = depth[0];
+    let res = '';
+
+    scan:
+    for (let i=0; i<item.length; i++){
+      if (depth[i] == d){
+        // Strip of the positional character (*, 1., 24.) and the trailing space
+        search:
+        for (var j=0; j<item[i].length; j++){
+          if (item[i][j] == ' '){
+            break search;
+          }
+        }
+        j += 1;
+
+        res += `<li>${item[i].slice(j)}</li>`;
+        continue scan;
+      }
+
+      // Otherwise this element but be out of the current depth
+      // Find all elements at this depth
+      search:
+      for (var j=i+1; j<item.length; j++){
+        if (depth[j] < depth[i]){
+          break search;
+        }
+      }
+
+      res += comp(item.slice(i, j), depth.slice(i, j));
+      i = j-1; //Don't scan the nested values that were just compiled
+    }
+
+    if (ordered){
+      return '<ol>'+res+'</ol>';
+    }else{
+      return '<ul>'+res+'</ul>';
+    }
+  }
+
+  t = comp(t, d);
+
+  return t;
+}
+
+
 
 
 module.exports = {encode};
