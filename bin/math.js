@@ -24,6 +24,7 @@ function encode(input){
 
     switch (input[i]){
       case '\\':
+        let hasLine = input[i+1] == '\\' ? 't' : 'f';
 
         // End the end of the numerator
         search:
@@ -76,7 +77,7 @@ function encode(input){
         a += 1;
         c += 1;
 
-        insert = `<span class="fract"><span class="top">${encode(input.slice(a, b))}</span><span class="bot">${encode(input.slice(c, d))}</span></span>`;
+        insert = `<span class="fract" w="${hasLine}"><sup>${encode(input.slice(a, b))}</sup><sub>${encode(input.slice(c, d))}</sub></span>`;
         input = input.slice(0, a-1) + insert + input.slice(d+1);
         i = a + insert.length-2;
 
@@ -134,7 +135,7 @@ function encode(input){
         a += 1;
         c += 1;
 
-        insert = `<span class="pow"><span class="base">${encode(input.slice(a, b))}</span><span class="exp">${encode(input.slice(c, d))}</span></span>`;
+        insert = `<span class="pow"><span class="base">${encode(input.slice(a, b))}</span><sup>${encode(input.slice(c, d))}</sup></span>`;
         input = input.slice(0, a-1) + insert + input.slice(d+1);
         i = a + insert.length-2;
 
@@ -165,7 +166,7 @@ function encode(input){
         i += 27;
         continue scan;
       case '=':
-        input = input.slice(0,i) + '<span class="opper">÷</span>' + input.slice(i+1);
+        input = input.slice(0,i) + '<span class="opper">=</span>' + input.slice(i+1);
         i += 27;
         continue scan;
       case '!':
@@ -184,6 +185,32 @@ function encode(input){
         input = input.slice(0, i) + input.slice(i+1);
         i--;
         continue;
+    
+      case 's':
+        if (input.slice(i, 5) == 'sqrt('){
+          a += 5;
+
+          // Find the end of the sqrt
+          search:
+          for (b=a; b<input.length; b++){
+            if (input[b] == '('){
+              dep += 1;
+            }else if (input[b] == ')'){
+              dep -= 1;
+
+              if (dep == 0){
+                break search;
+              }
+            }
+          }
+          dep = 0;
+
+          insert = `√<span class="sqrt">${input.slice(a, b-1)}</span>`;
+          input = input.slice(0, i) + insert + input.slice(b);
+          i += insert.length;
+
+          continue scan;
+        }
     }
 
     // Must be a number / or algebra

@@ -114,17 +114,21 @@ code .pun{
 code[type="eq"]{
   font-size: 16px;
 }
-code[type="eq"] .row{
-  display: flex;
+
+code[type="eq"] sub{
+  font-size: 14px;
 }
-code[type="eq"] .row * {
-  margin-top: auto;
-  margin-bottom: auto;
+code[type="eq"] sup{
+  font-size: 14px;
+}
+
+code[type=eq] .sqrt{
+  border-top: white 1px solid;
 }
 
 code[type="eq"] .opper{
   display: inline-block;
-  font-size: 16px;
+  font-size: 18px;
 
   margin-left: 5px;
   margin-right: 5px;
@@ -134,32 +138,39 @@ code[type="eq"] .char{
   display: inline-block;
 }
 
-code[type="eq"] .pow{
+code[type=eq] .pow{
   display: inline-block;
 }
-code[type="eq"] .pow .base{
+code[type=eq] .pow .base{
   display: inline-block;
 }
-code[type="eq"] .pow .exp{
-  position: relative;
-  top: -6px;
-
-  font-size: 10px;
+code[type=eq] .pow sup{
+  font-size: 12px;
 }
 
-code[type="eq"] .fract{
+code[type=eq] .fract{
   display: inline-block;
 
   font-size: 10px;
   text-align: center;
 }
-code[type="eq"] .fract .top{
+code[type=eq] .fract sup{
   display: block;
-
   padding: 0px 4px;
 
   border-bottom: solid white 1px;
 }
-code[type="eq"] .fract .bot{
+code[type=eq] .fract sub{
   display: block;
+}
+
+code[type=eq] .fract[w=t] sup{
+  border-bottom: none;
+  margin-bottom: -5px;
+  padding: 0px;
+
+  text-align: left;
+}
+code[type=eq] .fract[w=t] sub{
+  text-align: left;
 }
