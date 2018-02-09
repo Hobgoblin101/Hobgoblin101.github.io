@@ -389,7 +389,7 @@ function list(t){
         }
         j += 1;
 
-        res += `<li>${item[i].slice(j)}</li>`;
+        res += `<li>${encode(item[i].slice(j), true)}</li>`;
         continue scan;
       }
 
@@ -502,7 +502,7 @@ function table(t){
   for (let y=2; y<item.length; y++){
     res += '<tr>';
     for (let x=0; x<item[y].length; x++){
-      res += `<td style="text-align:${item[1][x]};">${item[y][x]}</td>`;
+      res += `<td style="text-align:${item[1][x]};">${encode(item[y][x], true)}</td>`;
     }
     res += '</tr>';
   }

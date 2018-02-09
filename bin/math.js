@@ -1,16 +1,37 @@
-function encode(input){
+function encode(input, nested){
+  input = input.replace(/<=/g, '≤').replace(/>=/g, '≥').replace(/<</g, '≪').replace(/>>/g, '≫')
+    .replace(/\+\/-/g, '±').replace(/-\/\+/g, '∓');
+
   let insert = '';
   let dep = 0; // Depth
   let a = 0;
   let b = 0;
   let c = 0;
   let d = 0;
+
+  let s = -1;
   
   scan:
   for (let i=0; i<input.length; i++){
+    // Resolve unhandled nests
+    if (s != -1 && dep == 0 && input[i-1] == ')'){
+      i -= 1;
+
+      let insert = '('+ encode(input.slice(s+1, i), true);
+      input = input.slice(0, s) + insert + input.slice(i);
+      i = (s) + insert.length; // Move scanner to the end of the insert
+      s = -1; // Make this braket resolved
+
+      continue scan;
+    }
+
     // Only work at the current depth
     switch (input[i]){
       case '(':
+        if (dep == 0){
+          s = i;
+        }
+
         dep += 1;
         continue scan;
       case ')':
@@ -77,7 +98,7 @@ function encode(input){
         a += 1;
         c += 1;
 
-        insert = `<span class="fract" w="${hasLine}"><sup>${encode(input.slice(a, b))}</sup><sub>${encode(input.slice(c, d))}</sub></span>`;
+        insert = `<span class="fract" w="${hasLine}"><sup>${input.slice(a, b)}</sup><sub>${encode(input.slice(c, d))}</sub></span>`;
         input = input.slice(0, a-1) + insert + input.slice(d+1);
         i = a + insert.length-2;
 
@@ -135,7 +156,7 @@ function encode(input){
         a += 1;
         c += 1;
 
-        insert = `<span class="pow"><span class="base">${encode(input.slice(a, b))}</span><sup>${encode(input.slice(c, d))}</sup></span>`;
+        insert = `<span class="pow"><span class="base">${input.slice(a, b)}</span><sup>${encode(input.slice(c, d), true)}</sup></span>`;
         input = input.slice(0, a-1) + insert + input.slice(d+1);
         i = a + insert.length-2;
 
@@ -187,12 +208,13 @@ function encode(input){
         continue;
     
       case 's':
-        if (input.slice(i, 5) == 'sqrt('){
-          a += 5;
+        if (input.slice(i, i+5) == 'sqrt('){
+          a = i+5;
 
           // Find the end of the sqrt
+          dep = 0;
           search:
-          for (b=a; b<input.length; b++){
+          for (b=a-1; b<input.length; b++){
             if (input[b] == '('){
               dep += 1;
             }else if (input[b] == ')'){
@@ -205,9 +227,9 @@ function encode(input){
           }
           dep = 0;
 
-          insert = `√<span class="sqrt">${input.slice(a, b-1)}</span>`;
-          input = input.slice(0, i) + insert + input.slice(b);
-          i += insert.length;
+          insert = `√<span class="sqrt">${encode(input.slice(a, b))}</span>`;
+          input = input.slice(0, i) + insert + input.slice(b+1);
+          i += insert.length-1;
 
           continue scan;
         }

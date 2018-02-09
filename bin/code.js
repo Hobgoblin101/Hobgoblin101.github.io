@@ -9,7 +9,7 @@ let highlight = {
     'return ', 'return;', 'yeild ', 'yeild;',
     'if', 'else', 'elif', 'end', 'for',
     'break', 'continue',
-    ' in ', ' is ', ' not ',
+    ' in ', ' is ', ' not ', ' and ', ' or ',
     'select ', 'from ', 'where ', 'orderby ', 'join ',
     'import ',
     '=', '+', '/ ', '%', '*', ' - ', ' & ', '|',

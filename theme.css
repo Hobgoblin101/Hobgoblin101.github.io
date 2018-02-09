@@ -51,6 +51,9 @@ b{
 i{
   font-style: italic;
 }
+p{
+  padding-left: 10px;
+}
 
 break{
   display: block;
@@ -115,7 +118,7 @@ code{
   font-size: 0.8em;
 
   padding: 0.6em;
-  margin: 0.4em;
+  margin: 0.4em 0.4em 0.4em -10px;
   border-radius: 3px;
 }
 code::selection{
@@ -143,30 +146,44 @@ code .pun{
 
 
 code[type="eq"]{
-  font-size: 16px;
+  font-family: 'Cambria Math', 'Times New Roman';
+  font-size: 17px;
+  font-weight: 500;
+
+  width: auto;
+
+  background-color: #f5f5f5;
+  color: black;
+
+  border-radius: 5px;
 }
 
-code[type="eq"] *{
-  display: inline-block;
+code[type=eq] .row{
+  display: flex;
+  vertical-align: middle;
+}
+code[type=eq] .row .char{
+  margin-top: auto;
+  margin-bottom: auto;
 }
 
 code[type="eq"] sub, code[type="eq"] sup{
-  font-size: 14px;
+  font-size: 15px;
+  min-height: 15px;
 }
 
 code[type=eq] .sqrt{
-  border-top: #f8f8f0 1px solid;
+  border-top: black 1px solid;
 }
 
 code[type="eq"] .opper{
-  font-size: 18px;
+  font-size: 16px;
+  font-weight: 1000;
 
+  margin-top: auto;
+  margin-bottom: auto;
   margin-left: 5px;
   margin-right: 5px;
-}
-
-code[type=eq] .pow sup{
-  font-size: 12px;
 }
 
 code[type=eq] .fract{
@@ -174,17 +191,18 @@ code[type=eq] .fract{
   text-align: center;
 }
 code[type=eq] .fract sup{
-  display: block;
-  padding: 0px 4px;
+  display: inline-block;
+  padding: 0px 2px;
 
-  border-bottom: solid white 1px;
+  margin-bottom: -2px;
 }
 code[type=eq] .fract sub{
   display: block;
+
+  border-top: solid black 1px;
 }
 
 code[type=eq] .fract[w=t] sup{
-  border-bottom: none;
   margin-bottom: -5px;
   padding: 0px;
 
@@ -192,4 +210,5 @@ code[type=eq] .fract[w=t] sup{
 }
 code[type=eq] .fract[w=t] sub{
   text-align: left;
+  border-top: none;
 }
