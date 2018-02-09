@@ -50,6 +50,15 @@ function encode(input,nested){
       }
     }
 
+    // New Line
+    if (t.slice(i, i+3) == '  \n'){
+      insert = '</br>';
+      t = t.slice(0, i) + insert + t.slice(i+2);
+      i += insert.length-1;  // Do not rescan the data
+
+      continue scan;
+    }
+
     // List
     if (t[i] == '\n' && (t.slice(i+1, i+3) == '* ' || t.slice(i+1, i+4) == '1. ')){
       a = i+1;
@@ -63,7 +72,7 @@ function encode(input,nested){
 
       insert = list(t.slice(a, b));
       t = t.slice(0, i) + insert + t.slice(b);
-      i += insert.length;
+      i += insert.length-1;
 
       continue scan;
     }
@@ -81,22 +90,13 @@ function encode(input,nested){
 
       insert = table(t.slice(a, b));
       t = t.slice(0, i) + insert + t.slice(b);
-      i += insert.length -1 ;
+      i += insert.length-1;
     }
     
     // New Paragraph
     if (i > 1 && t.slice(i, i+2) == '\n\n'){
       t = t.slice(0, i) + '</p><p>' + t.slice(i+1);
       i += 6; //insert.length - 1
-
-      continue scan;
-    }
-    
-    // New Line
-    if (t.slice(i, i+3) == '  \n'){
-      insert = '<br>';
-      t = t.slice(0, i) + insert + t.slice(i+2);
-      i += insert.length-1;  // Do not rescan the data
 
       continue scan;
     }
@@ -183,7 +183,7 @@ function encode(input,nested){
 
     // Section Break
     if (t.slice(i, i+5) == '\n---\n'){
-      insert = `</p><break/><p>`;
+      insert = `</p><break></break><p>`;
       t = t.slice(0,i) + insert + t.slice(i+4);
       i += insert.length-1;
 
@@ -228,7 +228,7 @@ function encode(input,nested){
         if (d != -1){
           insert = `<a href="${t.slice(c+1, d)}">${encode(t.slice(a+1,b), true)}</a>`;
           t = t.slice(0, i) + insert + t.slice(d+1);
-          i += insert.length;
+          i += insert.length-1;
 
           continue scan;
         }
@@ -273,7 +273,7 @@ function encode(input,nested){
         if (d != -1){
           insert = `<img href="${t.slice(c+1, d)}" alt="${t.slice(a+1,b)}" />`;
           t = t.slice(0, i) + insert + t.slice(d+1);
-          i += insert.length;
+          i += insert.length-1;
 
           continue scan;
         }
@@ -317,21 +317,16 @@ function encode(input,nested){
 
       insert = `</p><blockquote>${encode(insert)}</blockquote><p>`;
       t = t.slice(0,i) + insert + t.slice(b+1);
-      i += insert.length;
+      i += insert.length-1;
     }
   }
 
   if (!nested){
     // Bake content into a paragraph
     t = '<p>'+t+'</p>';
-
-    // If the input starts with a header causing a leading blank paragraph
-    if (t.slice(0, 7) == '<p></p>'){
-      t = t.slice(7);
-    }
   }
 
-  return t;
+  return t//.replace(/<p><\/p>/g, '').replace(/<p>\n<\/p>/g, ''); //Clean up any failed paragraphs
 }
 
 
@@ -507,7 +502,7 @@ function table(t){
     res += '</tr>';
   }
 
-  return `<table>${res}</table`;
+  return `<table>${res}</table>`;
 }
 
 

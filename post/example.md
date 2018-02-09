@@ -1,15 +1,32 @@
 Title: How to use this system
-Author: Ajani James Bilby
 Date: 9/2/2018
-Tags: Tutorial; Document
-UnIndexed: false
+Tags: Document
+UnIndexed: true
 ---
 Documentation on how to use my custom blog system
 ---
 
-# Snippets
-These allow you to insert content designed to be formatted differently that markdown.  
-Examples as shown are equations and SQL.
+# H1
+## H2
+### H3
+#### H4
+##### H5
+###### H6
+
+**Bold** *Italics* ***Both***.  
+~~Deleted / Strike Though~~
+
+* Un
+* Ordered
+  * List
+* Data
+
+1. Ordered
+  1. List
+2. Data
+
+[Link](/)  
+![image](/404)
 
 ## Maths
 ```math
@@ -26,3 +43,21 @@ Select *
 From Students AS Student
 Where Student.Age > 15 AND Student.State = "NSW"
 ```
+
+## Tables
+
+| Column 1 | Column 2 | Column 3 |
+|:--|:--:|--:|
+|1|2|3|
+|4|5|6|
+
+Text after table
+
+## Section Break
+
+---
+
+## Blockquotes
+> This is a
+> Multi-lined
+> Quote

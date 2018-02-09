@@ -15,6 +15,8 @@ const server = http.createServer((req, res)=>{
       return;
     }
 
+    res.setHeader('content-type', 'text/html; charset=utf-8');
+    res.statusCode = 200;
     let s = fs.createReadStream(path);
     s.pipe(res);
     s.on('end', ()=>{

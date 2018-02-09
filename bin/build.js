@@ -34,7 +34,7 @@ function Compile(article){
   }
 
   meta = data.slice(0, a).split('\n');
-  blurb = data.slice(a+5, b-4);
+  blurb = data.slice(a+5, b);
   body = data.slice(b+5);
 
   metaData[i] = {};
