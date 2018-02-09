@@ -112,3 +112,12 @@ table tr th, table tr td{
 table tr:nth-child(2n){
   background-color: #f6f8fa;
 }
+
+
+
+@media (min-width: 500px){
+  body{
+    margin-left: 10%;
+    margin-right: 10%;
+  }
+}
