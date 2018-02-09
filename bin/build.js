@@ -52,26 +52,25 @@ function Compile(article){
           tags.push(tag);
         }
       }
-    }else if (entry[0] == 'unindexed' && entry[1][0] == 't'){
-      metaData.length = i; // remove this element
-      break;
     }else{
       metaData[i][entry[0]] = entry[1];
     }
-  }
-
-  if (metaData[i]){
-    metaData[i].name = article;
-    metaData[i].blurb = markdown.encode(blurb);
   }
 
 
   body = markdown.encode(body);
   fs.writeFileSync(
     './../p/'+article+'.html',
-    `<head>${head}</head><body>${header}${body}${footer}</body>`,
+    `<head><title>${metaData[i].title}</title>${head}</head><body>${header}${body}${footer}</body>`,
     'utf8'
   );
+
+  if (metaData[i].unindexed && metaData[i].unindexed != 'f'){
+    metaData.length = i; // remove this element
+  }else{
+    metaData[i].name = article;
+    metaData[i].blurb = markdown.encode(blurb);
+  }
 }
 
 
