@@ -1,7 +1,7 @@
 Title: About Me
 Date: 9/2/2018
 Tags: Profile
-UnIndexed: true
+unlisted: true
 ---
 Details about myself
 ---

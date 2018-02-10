@@ -51,7 +51,7 @@
 
   margin-bottom: 2px;
 }
-.articles article .tags{
+.tags{
   grid-row-start: 4;
   grid-column-start: 1;
   grid-column-end: span 2;
@@ -60,7 +60,7 @@
 
   text-align: right;
 }
-.articles tag{
+.tags tag{
   font-weight: 800;
   font-size: 12px;
 

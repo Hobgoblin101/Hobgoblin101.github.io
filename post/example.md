@@ -1,7 +1,7 @@
 Title: How to use this system
 Date: 9/2/2018
 Tags: Document
-UnIndexed: true
+unlisted: true
 ---
 Documentation on how to use my custom blog system
 ---

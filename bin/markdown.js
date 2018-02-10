@@ -318,7 +318,7 @@ function encode(input,nested){
       if (b != -1){
         insert = `<code inline="true">${t.slice(a, b)}</code>`;
         t = t.slice(0, i) + insert + t.slice(b+2);
-        t += insert.length-1;
+        i += insert.length-1;
 
         continue scan;
       }

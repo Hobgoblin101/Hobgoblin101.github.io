@@ -58,14 +58,20 @@ function Compile(article){
   }
 
 
-  body = markdown.encode(body);
+  body = `<h1>${metaData[i].title}</h1>`+markdown.encode(body);
+  body += '<span class="tags"><h6 style="display: inline-block;">Tags:</h6>'
+  for (tag of metaData[i].tags){
+    body += `<a href="/t/${tag}.html"><tag>${tag};</tag></a>`;
+  }
+  body += '</span></article>';
+
   fs.writeFileSync(
     './../p/'+article+'.html',
     `<head><title>${metaData[i].title}</title>${head}</head><body>${header}${body}${footer}</body>`,
     'utf8'
   );
 
-  if (metaData[i].unindexed && metaData[i].unindexed != 'f'){
+  if (metaData[i].unlisted && metaData[i].unlisted[0] == 't'){
     metaData.length = i; // remove this element
   }else{
     metaData[i].name = article;
