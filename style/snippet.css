@@ -34,6 +34,18 @@ code .pun{
 
 
 
+
+code[inline="true"]{
+  display: inline-block;
+  padding: 2px;
+  margin: 0px;
+}
+
+
+
+
+
+
 code[type="eq"]{
   font-family: 'Cambria Math', 'Times New Roman';
   font-size: 17px;

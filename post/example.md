@@ -28,7 +28,9 @@ Documentation on how to use my custom blog system
 [Link](/)  
 ![image](/404)
 
-## Maths
+## Snippet
+
+### Maths
 ```math
 x = (-b +/- sqrt((b)^(2)-4ac)) \ (2a)
 water = H ()\\(2) O
@@ -36,13 +38,16 @@ water = H ()\\(2) O
 1 + (3)\\() sqrt(8) = 3
 ```
 
-## Programming
+### Programming
 
 ```
 Select *
 From Students AS Student
 Where Student.Age > 15 AND Student.State = "NSW"
 ```
+
+### Inline (plain)
+Here is ``inline snippet`` content.
 
 ## Tables
 

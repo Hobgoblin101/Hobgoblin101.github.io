@@ -297,6 +297,33 @@ function encode(input,nested){
       i += insert.length-1;
     }
 
+    // Inline Snippet
+    if (t[i] == '`' && t[i+1] == '`' && t[i+2] != '`'){
+      a = i+2;
+
+      search:
+      for (b=a+1; b<t.length; b++){
+        // This type of snippet is single line only
+        if (t[b] == '\n'){
+          b = -1;
+          break;
+        }
+
+        // Found the end tag
+        if (t[b] == '`' && t[b+1] == '`' && t[b+2] != '`'){
+          break;
+        }
+      }
+
+      if (b != -1){
+        insert = `<code inline="true">${t.slice(a, b)}</code>`;
+        t = t.slice(0, i) + insert + t.slice(b+2);
+        t += insert.length-1;
+
+        continue scan;
+      }
+    }
+
     // Quote
     if (t.slice(i, i+3) == '\n> '){
       insert = '';
