@@ -25,6 +25,8 @@
 
   text-align: right;
 }
+
+
 .articles article h3{
   grid-row: 1;
   grid-column: 1;
@@ -32,6 +34,11 @@
   margin-top: 0px;
   margin-bottom: 0px;
 }
+.articles article a{
+  text-decoration: none;
+}
+
+
 .articles article .author{
   grid-row-start: 2;
 
@@ -43,6 +50,8 @@
   grid-column-start: 1;
   grid-column-end: span 2;
 }
+
+
 .articles article p{
   grid-row-start: 3;
 
@@ -51,6 +60,8 @@
 
   margin-bottom: 2px;
 }
+
+
 .tags{
   grid-row-start: 4;
   grid-column-start: 1;
