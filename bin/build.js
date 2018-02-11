@@ -84,7 +84,7 @@ function Compile(article){
 
 
 function BuildIndexPage(){
-  let body = '';
+  let body = '<title>Index</title>';
 
   body += '<div class="articles">'
   for (let entry of metaData){
