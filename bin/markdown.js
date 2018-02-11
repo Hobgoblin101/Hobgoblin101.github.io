@@ -42,7 +42,7 @@ function encode(input,nested){
           }
         }
 
-        insert = `</p><h${count}>${encode(t.slice(a+1, b), true)}</h${count}><p>`;
+        insert = `</p><a name="${t.slice(a+1, b)}"><h${count}>${encode(t.slice(a+1, b), true)}</h${count}></a><p>`;
         t = t.slice(0, i) + insert + t.slice(b);
         i += insert.length-1; // Do not rescan the data
 

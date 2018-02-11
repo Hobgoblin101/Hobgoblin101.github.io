@@ -2,16 +2,17 @@
 
 <link rel="stylesheet" type="text/css" href="/style/main.css">
 <link rel="stylesheet" type="text/css" href="/style/head.css">
+<link rel="stylesheet" type="text/css" href="/style/footer.css">
 <link rel="stylesheet" type="text/css" href="/style/article.css">
 <link rel="stylesheet" type="text/css" href="/style/snippet.css"></head><body><header>
   <a href="/index.html">Home</a>
   <a href="/p/me.html" style="float: right;">Ajani James Bilby</a>
-</header><h1>Two's Complement Integer</h1><p>Two's complement integer (TCI) is a special way of encoding signed (+/-) integers in a way that the standard method of addition for integers still applies.</br>
+</header><div class="wrapper"><h1>Two's Complement Integer</h1><p>Two's complement integer (TCI) is a special way of encoding signed (+/-) integers in a way that the standard method of addition for integers still applies.</br>
 The way it does this is by having the leading bit being equilevent to a sign (0 means positive and 1 means negative), however when a number is negative numbers start a the highest possible bit combination and works down.</p><p><table><tr><th>Decimal </th><th>Binary TCI </th></tr><tr><td style="text-align:right;">0 </td><td style="text-align:left;"><code inline="true">000</code> </td></tr><tr><td style="text-align:right;">1 </td><td style="text-align:left;"><code inline="true">001</code> </td></tr><tr><td style="text-align:right;">2 </td><td style="text-align:left;"><code inline="true">010</code> </td></tr><tr><td style="text-align:right;">3 </td><td style="text-align:left;"><code inline="true">011</code> </td></tr><tr><td style="text-align:right;">-4 </td><td style="text-align:left;"><code inline="true">100</code> </td></tr><tr><td style="text-align:right;">-3 </td><td style="text-align:left;"><code inline="true">101</code> </td></tr><tr><td style="text-align:right;">-2 </td><td style="text-align:left;"><code inline="true">110</code> </td></tr><tr><td style="text-align:right;">-1 </td><td style="text-align:left;"><code inline="true">111</code> </td></tr></table></p><p>
 While this looks kind of weird, and is hard to initially get your head around, what makes this system special is when you try addition.
 <code type="eq"><span class="row"><span class="char">1</span><span class="opper">+</span>(<span class="opper">-</span><span class="char">2</span>)<span class="opper">=</span>(-1)</span><span class="row"><span class="char">0</span><span class="char">0</span><span class="char">1</span><span class="opper">+</span><span class="char">1</span><span class="char">1</span><span class="char">0</span><span class="opper">=</span><span class="char">1</span><span class="char">1</span><span class="char">1</span></span><span class="row"></span></code>
 or
 <code type="eq"><span class="row"><span class="char">3</span><span class="opper">+</span>(<span class="opper">-</span><span class="char">2</span>)<span class="opper">=</span>(1)</span><span class="row"><span class="char">0</span><span class="char">1</span><span class="char">1</span><span class="opper">+</span><span class="char">1</span><span class="char">1</span><span class="char">0</span><span class="opper">=</span><span class="char">0</span><span class="char">0</span><span class="char">1</span></span><span class="row"></span></code></p><p>
-As you can see it just works, no custom methods needed for when a integer is negative or positive, it doesn't matter, addition still works the same.</p><span class="tags"><h6 style="display: inline-block;">Tags:</h6><a href="/t/Data-Structure.html"><tag>Data-Structure;</tag></a><a href="/t/IPT.html"><tag>IPT;</tag></a></span></article><footer>
-  
+As you can see it just works, no custom methods needed for when a integer is negative or positive, it doesn't matter, addition still works the same.</p><span class="tags"><h6 style="display: inline-block;">Tags:</h6><a href="/t/Data-Structure.html"><tag>Data-Structure;</tag></a><a href="/t/IPT.html"><tag>IPT;</tag></a></span></article></div><footer>
+  <a href="https://goo.gl/forms/8wgwU9mPZlKogDEn2">Feedback</a>
 </footer></body>

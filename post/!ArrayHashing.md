@@ -1,6 +1,6 @@
 Title: Array VS Password Hashing
 Date: -/2/2018
-Tags: Document; Tutorial
+Tags: IPT
 Unlisted: true
 ---
 Similar techniques for different goals

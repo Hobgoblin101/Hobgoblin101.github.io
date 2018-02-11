@@ -2,11 +2,12 @@
 
 <link rel="stylesheet" type="text/css" href="/style/main.css">
 <link rel="stylesheet" type="text/css" href="/style/head.css">
+<link rel="stylesheet" type="text/css" href="/style/footer.css">
 <link rel="stylesheet" type="text/css" href="/style/article.css">
 <link rel="stylesheet" type="text/css" href="/style/snippet.css"></head><body><header>
   <a href="/index.html">Home</a>
   <a href="/p/me.html" style="float: right;">Ajani James Bilby</a>
-</header><h1>Relational Table DBMS</h1><p><b>Recommended:</b> <a href="/p/1">UTF-8 Encoding</a>; <a href="/p/2">Two's Complement Integer</a></p><p></p><blockquote><p>I will not be going into table/data encryption as well as distributed databases since they are another level of obscurity on top of the actual data storage<br>Also I will not be discussing a query language as part of this article<br></p></blockquote><p>
+</header><div class="wrapper"><h1>Relational Table DBMS</h1><p><b>Recommended:</b> <a href="/p/1.html">UTF-8 Encoding</a>; <a href="/p/2.html">Two's Complement Integer</a></p><p></p><blockquote><p>I will not be going into table/data encryption as well as distributed databases since they are another level of obscurity on top of the actual data storage<br>Also I will not be discussing a query language as part of this article<br></p></blockquote><p>
 Tables are perceived as a two dimensional table, but they need to be stored as a one dimensional file while being both data efficient as well as performance optimal.</br></p><p>
 A key factor that allows all modern databases to be extremely fast is knowing where the data is without reading the whole blob. This is done by restricting the size of attributes, thus if you want the value at index x, you just need to read a section of the blob;
 <code type="eq"><span class="row"><span class="char">s</span><span class="char">t</span><span class="char">a</span><span class="char">r</span><span class="char">t</span><span class="opper">=</span><span class="char">x</span><span class="opper">×</span><span class="char">s</span><span class="char">i</span><span class="char">z</span><span class="char">e</span></span><span class="row"><span class="char">e</span><span class="char">n</span><span class="char">d</span><span class="opper">=</span><span class="char">s</span><span class="char">t</span><span class="char">a</span><span class="char">r</span><span class="char">t</span><span class="opper">+</span><span class="char">s</span><span class="char">i</span><span class="char">z</span><span class="char">e</span></span><span class="row"></span></code></p><p>
@@ -42,6 +43,6 @@ If these references are exact references, then if you remove a person from your 
 <b>Never delete any records</b></br>
 Which is generally a bad solution since it means that your friends list would end up being completely oversize after you make and lose friendships</p><p>
 <b>Fill in empty rows</b>
-Never run a compacting algorithum on your table, and instead leave rows blank, then when it comes to adding a new person to your friends list, they fill up a previously empty row. This will mean that you will end up with empty rows in your table, but as long as you average around the space number of friends there will never be too many empty rows.</p><span class="tags"><h6 style="display: inline-block;">Tags:</h6><a href="/t/Data-Structure.html"><tag>Data-Structure;</tag></a><a href="/t/IPT.html"><tag>IPT;</tag></a></span></article><footer>
-  
+Never run a compacting algorithum on your table, and instead leave rows blank, then when it comes to adding a new person to your friends list, they fill up a previously empty row. This will mean that you will end up with empty rows in your table, but as long as you average around the space number of friends there will never be too many empty rows.</p><span class="tags"><h6 style="display: inline-block;">Tags:</h6><a href="/t/Data-Structure.html"><tag>Data-Structure;</tag></a><a href="/t/IPT.html"><tag>IPT;</tag></a></span></article></div><footer>
+  <a href="https://goo.gl/forms/8wgwU9mPZlKogDEn2">Feedback</a>
 </footer></body>

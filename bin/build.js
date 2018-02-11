@@ -67,7 +67,7 @@ function Compile(article){
 
   fs.writeFileSync(
     './../p/'+article+'.html',
-    `<head><title>${metaData[i].title}</title>${head}</head><body>${header}${body}${footer}</body>`,
+    `<head><title>${metaData[i].title}</title>${head}</head><body>${header}<div class="wrapper">${body}</div>${footer}</body>`,
     'utf8'
   );
 
