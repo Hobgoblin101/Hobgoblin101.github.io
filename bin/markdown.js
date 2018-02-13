@@ -74,6 +74,8 @@ function encode(input,nested){
       t = t.slice(0, i) + insert + t.slice(b);
       i += insert.length-1;
 
+      console.log(insert);
+
       continue scan;
     }
 
@@ -353,7 +355,7 @@ function encode(input,nested){
     t = '<p>'+t+'</p>';
   }
 
-  return t//.replace(/<p><\/p>/g, '').replace(/<p>\n<\/p>/g, ''); //Clean up any failed paragraphs
+  return t.replace(/<p><\/p>/g, '').replace(/<p>\n<\/p>/g, ''); //Clean up any failed paragraphs
 }
 
 

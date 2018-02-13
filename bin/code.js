@@ -7,7 +7,7 @@ let highlight = {
   kwd: [
     'define ', 'const ',
     'return ', 'return;', 'yeild ', 'yeild;',
-    'if', 'else', 'elif', 'end', 'for',
+    'if', 'else', 'elif', 'for',
     'break', 'continue',
     ' in ', ' is ', ' not ', ' and ', ' or ',
     'select ', 'from ', 'where ', 'orderby ', 'join ',
@@ -36,7 +36,7 @@ function encode(input){
     return '<code type="eq">'+math.encode(input)+'</code>';
   }
 
-  let res = input.slice(i, -1)
+  let res = input.slice(0, -1)
     .replace(/</g, '&lt').replace(/>/g, '&gt') // Encode <, >
     .replace(/\n/g, '<br>').replace(/ /g, '&nbsp').replace(/\t/g, '&nbsp&nbsp'); // Encode tabs and spaces
   let j;
