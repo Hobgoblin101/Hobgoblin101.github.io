@@ -1,4 +1,5 @@
 const markdown = require('./markdown.js');
+const rss = require('./rss.js');
 const fs = require('fs');
 
 let header = fs.readFileSync('./../header.html').toString();
@@ -76,6 +77,7 @@ function Compile(article){
   }else{
     metaData[i].name = article;
     metaData[i].blurb = markdown.encode(blurb);
+    metaData[i].rawBlurb = blurb;
   }
 }
 
@@ -116,7 +118,6 @@ function BuildIndexJSON(){
     'utf8'
   );
 }
-function BuildIndexRSS(){}
 function BuildTagPage(tag){
   let body = '';
   body += '<h2>Tag: '+tag+'</h2>';
@@ -216,3 +217,5 @@ BuildIndexPage();
 for (let tag of tags){
   BuildTagPage(tag);
 }
+
+fs.writeFileSync('./../feed.rss', rss(metaData));
