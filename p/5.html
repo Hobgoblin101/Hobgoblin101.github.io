@@ -1,0 +1,33 @@
+<head><title>Appendix: Key VS Password Hashing</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#24292e">
+
+<link rel="stylesheet" type="text/css" href="/style/main.css">
+<link rel="stylesheet" type="text/css" href="/style/head.css">
+<link rel="stylesheet" type="text/css" href="/style/footer.css">
+<link rel="stylesheet" type="text/css" href="/style/article.css">
+<link rel="stylesheet" type="text/css" href="/style/snippet.css"></head><body><header>
+  <a href="/index.html">Home</a>
+  <a href="/p/me.html" style="float: right;">Ajani James Bilby</a>
+</header><div class="wrapper"><h1>Appendix: Key VS Password Hashing</h1><p>Follows on <a href="/p/4.html">from</a></br></p><p>
+A way of making a better hash functions, or adapting an existing one is to limit the range of numbers it can produce. This means that if you had a function that previously had no collisions, but would take up allot of space you can squish it down to take up less space and hopefully not create any collisions.</br>
+A way of doing this simply is to use modulo. First of all we will add a modulo opperator to one of our previous encodings.
+<code><span class="typ">function&nbsp</span>encode(str,&nbspmodulo){<br>&nbsp&nbspstr&nbsp<span class="kwd">=</span>&nbspstr.toLowerCase();<br>&nbsp&nbsp<span class="typ">let&nbsp</span>res&nbsp<span class="kwd">=</span>&nbspchars.indexOf(str[<span class="lit">0</span>])<span class="kwd">+</span><span class="lit">1</span>;<br><br>&nbsp&nbsp<span class="kwd">for</span>&nbsp(<span class="typ">let&nbsp</span>i<span class="kwd">=</span><span class="lit">1</span>;&nbspi<span class="kwd">&lt</span>str.length;&nbspi<span class="kwd">+</span><span class="kwd">+</span>){<br>&nbsp&nbsp&nbsp&nbspres&nbsp<span class="kwd">=</span>&nbsp(res&nbsp<span class="kwd">*</span>&nbspchars.indexOf(str[i])<span class="kwd">+</span><span class="lit">1</span>)&nbsp<span class="kwd">%</span>&nbspmodulo;<br>&nbsp&nbsp}<br><br>&nbsp&nbsp<span class="kwd">return&nbsp</span>res;<br>}</code></p><p>
+Now we need to try and pick a good modulo value that won't create many collisions, and a good way to decide that is to try and find a best possible solution using sample data.</br>
+Using our previous range as our max value, we will loop though every possible integer modulo and find the number with the least amout of collisions (<a href="/code/5.js">code</a>).</p><a name="Results"><h2>Results</h2></a><p>
+<table>
+  <tr>
+    <th>Modulo</th>
+    <td>0</td><td>2</td><td>3</td><td>4</td><td>5</td><td>9</td><td>10</td><td>11</td><td>20</td>
+  </tr>
+  <tr>
+    <th>Conflicts</th>
+    <td>9</td><td>8</td><td>7</td><td>6</td><td>5</td><td>4</td><td>3</td><td>2</td><td>1</td>
+  </tr>
+</table></p><p>
+We can now see that <code inline="true">20</code> is our best value, which is considerably smaller that our previous range of <code inline="true">11760000</code>. However we still have a collision.</p><a name="Hashing Collision handling"><h2>Hashing Collision handling</h2></a><p>
+A way of dealing with hashing collisions is to store key and value pairs instead of just one or the other. Thus if we try and set a new value with the same hash as an existing one, we can recognise that the keys do not match, and then store the data in the next available slot.</br>
+Thus also when we try and read by an index as a result of a hash, we can check if the keys match, and if not we can scan each procceding slot until we find a match.</br>
+Also if we presult that data is never deleted we can terminate the scan if we find an empty slot, because if the data existed it would exist there.</p><span class="tags"><h6 style="display: inline-block;">Tags:</h6><a href="/t/IPT.html"><tag>IPT;</tag></a></span></article></div><footer>
+  <a href="https://goo.gl/forms/8wgwU9mPZlKogDEn2">Feedback</a>
+  <a href="/feed.rss" style="float:right">RSS Feed</a>
+</footer></body>

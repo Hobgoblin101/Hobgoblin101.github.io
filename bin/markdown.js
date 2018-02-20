@@ -74,8 +74,6 @@ function encode(input,nested){
       t = t.slice(0, i) + insert + t.slice(b);
       i += insert.length-1;
 
-      console.log(insert);
-
       continue scan;
     }
 
@@ -339,7 +337,7 @@ function encode(input,nested){
           }
         }
 
-        insert += t.slice(a+3, b)+'<br>';
+        insert += t.slice(a+3, b)+'\n';
 
         a = b;
       }

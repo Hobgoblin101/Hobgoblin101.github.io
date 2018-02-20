@@ -9,7 +9,9 @@
   <a href="/index.html">Home</a>
   <a href="/p/me.html" style="float: right;">Ajani James Bilby</a>
 </header><div class="wrapper"><h1>Relational Table DBMS</h1><p>
-<b>Recommended:</b> <a href="/p/1.html">UTF-8 Encoding</a>; <a href="/p/2.html">Two's Complement Integer</a></p><blockquote><p>I will not be going into table/data encryption as well as distributed databases since they are another level of obscurity on top of the actual data storage<br>Also I will not be discussing a query language as part of this article<br></p></blockquote><p>
+<b>Recommended:</b> <a href="/p/1.html">UTF-8 Encoding</a>; <a href="/p/2.html">Two's Complement Integer</a></p><blockquote><p>This article will not be discussing;<ul><li>Data Encryption</li><li>Data replecation / distribution</li><li>Query Languages</li><li>Sorting</li><li>Caching</li><li>Data Conflict resolution</li><li>Optimizing disk read writes</li></ul></p><p>
+Since they are all just extra layers of processing on top of what is discussed here, and it can be discussed separately
+</p></blockquote><p>
 Tables are essentially just a list of tuples (aka records, or rows), of which are stored into a file. However, tables appear to be 2D how does one store it into a linear file.</br>
 First of all, we need to break down a table into it's components.</p><break></break><a name="Attributes"><h2>Attributes</h2></a><p>
 These are the individual fields of a table. They are of set size and length of which makes our job of converting the dataset into a file much easier.</br>
@@ -30,11 +32,12 @@ Thus, the time taken to find a given tuple increases linearly.</p><a name="Key H
 The concept of <a href="/p/4.html">Key Hashing</a> is to convert a given value into a unique number (i.e. James => 1; Bob => 2),</br>
 this means that you can hash a given key to then get the index of the row belonging to that key.</br>
 Thus, this method can vastly improve the time it takes to get data from the table since it does not need to scan each tuple to see if it's key matches.</br>
-However, no hashing algorithm is perfect and there will be trade-offs for speed to performance, because you will end up with empty indexes between the data of which you have stored.</br></p><blockquote><p>I.E. if you hash 'Bob' => 3; and 'Sally' => 54 that they are the only people in your database you can see that you will now need to store index 1-2 & 4-53 to ensure that the hashing algorithm points to the correct tuple.<br></p></blockquote><p>Since you always use this hashing function to get the index then just read of the index the time taken to read a row is always a constant value, thus being optimal for large databases where size limitations are not as much of an issue.</p><break></break><a name="Referencing"><h2>Referencing</h2></a><p>
+However, no hashing algorithm is perfect and there will be trade-offs for speed to performance, because you will end up with empty indexes between the data of which you have stored.</br></p><blockquote><p>I.E. if you hash 'Bob' => 3; and 'Sally' => 54 that they are the only people in your database you can see that you will now need to store index 1-2 & 4-53 to ensure that the hashing algorithm points to the correct tuple.
+</p></blockquote><p>Since you always use this hashing function to get the index then just read of the index the time taken to read a row is always a constant value, thus being optimal for large databases where size limitations are not as much of an issue.</p><break></break><a name="Referencing"><h2>Referencing</h2></a><p>
 This allows data to be connected almost directly to allow the storing of more complex data.</br>
 For instance instead of storing a client's address with every online order they make you can instead just store the client ID as a reference then read the address form the client table.</p><a name="Key Referencing"><h3>Key Referencing</h3></a><p>
-Uses the systems previously described to find the target row.</br>
-<b>Note:</b> if it is a Composite key then you will need to store all key values for the reference to work.</p><a name="Exact Referencing"><h3>Exact Referencing</h3></a><p>
+Uses the systems previously described to find the target row.</br></p><blockquote><p>If it is a Composite key then you will need to store all key values for the reference to work.
+</p></blockquote><a name="Exact Referencing"><h3>Exact Referencing</h3></a><p>
 Instead of needing to re-find the target row every time, the reference is the exact index of the row. Thus, no extra processing is required to find the target tuple, instead it can just be read off.</p><break></break><a name="Compacting a Table"><h2>Compacting a Table</h2></a><p>
 This task removes any empty rows from the database one after another to decrease the size of the table. This operation while space effective will take time, and during processing no data can relyably be read or written to the table for fear or corruption. Thus, it is a highly expensive processing task.</br>
 Also, if you are using Key Hashing or Exact Referencing for performance speed ups it will break the entire system reading incorrect tuples, and even possibly attempting to read out of the table it's self.</br>

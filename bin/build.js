@@ -42,19 +42,20 @@ function Compile(article){
   for (let entry of meta){
     entry = entry.split(': ');
     entry[0] = entry[0].toLowerCase();
+    let val = entry.splice(1).join(': ');
 
     if (entry[0] == 'tags'){
-      entry[1] = entry[1].split('; ');
-      metaData[i][entry[0]] = entry[1];
+      val = val.split('; ');
+      metaData[i][entry[0]] = val;
 
       // Add tag to the list of tags
-      for (let tag of entry[1]){
+      for (let tag of val){
         if (tags.indexOf(tag) === -1){
           tags.push(tag);
         }
       }
     }else{
-      metaData[i][entry[0]] = entry[1];
+      metaData[i][entry[0]] = val;
     }
   }
 
