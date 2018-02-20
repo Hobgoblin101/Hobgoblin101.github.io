@@ -8,9 +8,9 @@
 <link rel="stylesheet" type="text/css" href="/style/snippet.css"></head><body><header>
   <a href="/index.html">Home</a>
   <a href="/p/me.html" style="float: right;">Ajani James Bilby</a>
-</header><div class="wrapper"><h1>Key VS Password Hashing</h1><p>Both Key and Password hashing aim to convert strings for any other data into a unique number. However, both of them do it in different ways to be optimal for their purposes.</p><a name="Password / Data hashing"><h2>Password / Data hashing</h2></a><p>
-Aims to encrypt data so it is a completely unique number of which is relatively impossible to work backwards to find the number. And there should be no encoding collisions.</br>
-Since these hashes are normally stored the length of them is not to much of an issue.</p><break></break><a name="Key Hashing"><h2>Key Hashing</h2></a><p>
+</header><div class="wrapper"><h1>Key VS Password Hashing</h1><p>Both Key and Password hashing aim to convert strings or any other data into a unique number. However, both do it in different ways to be optimal for their purposes.</p><a name="Password / Data hashing"><h2>Password / Data hashing</h2></a><p>
+Aims to encrypt data so it is a completely unique number of which is relatively impossible to work backwards (number to string). And there should be no encoding collisions.</br>
+Since these hashes are normally stored, the length of them is not to much of an issue.</p><break></break><a name="Key Hashing"><h2>Key Hashing</h2></a><p>
 Allows objects to be stored as an array.</br>
 Say that you have a DNS object <code inline="true">{'google.com': '8.8.8.8', 'facebook.com': '31.13.95.36'}</code>.</br>
 If you have a ton of domain names, then to find the specific IP of a server requires you to scan all of the keys to find the correct one then return it's result.</br>
