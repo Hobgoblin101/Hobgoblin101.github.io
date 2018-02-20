@@ -211,6 +211,15 @@ metaData = metaData.sort(function (a, b){
     return 1;
   }
 
+  // Sort by name
+  let i = parseInt(a.name) || a.name;
+  let j = parseInt(b.name) || b.name;
+  if (i > j){
+    return -1;
+  }else if (i < j){
+    return 1;
+  }
+
   return 0;
 });
 BuildIndexJSON();
