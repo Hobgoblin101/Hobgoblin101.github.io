@@ -5,11 +5,11 @@ let highlight = {
     'var ', 'let '
   ],
   kwd: [
-    'define ', 'const ',
+    'define ', 'const ', 'delete ',
     'return ', 'return;', 'yeild ', 'yeild;',
     'if', 'else', 'elif', 'for',
-    'break', 'continue',
-    ' in ', ' is ', ' not ', ' and ', ' or ',
+    'break;', 'continue;', 'continue ', 'break ',
+    ' in ', ' of ', ' is ', ' not ', ' and ', ' or ',
     'select ', 'from ', 'where ', 'orderby ', 'join ',
     'import ',
     '=', '+', '/ ', '%', '*', ' - ', ' & ', '|',

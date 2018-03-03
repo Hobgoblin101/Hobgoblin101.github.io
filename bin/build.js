@@ -121,7 +121,7 @@ function BuildIndexJSON(){
 }
 function BuildTagPage(tag){
   let body = '';
-  body += '<h2>Tag: '+tag+'</h2>';
+  body += '<h2 style="margin-left: 3%;">Tag: '+tag+'</h2>';
 
   body += '<div class="articles">'
   for (let entry of metaData){
