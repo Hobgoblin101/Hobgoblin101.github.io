@@ -177,8 +177,6 @@ function FindQuestions(people){
     }
   }
 
-  console.log(1, count);
-
   // Calculate the divide between have and have not for this question
   for (let opt in count){
     console.log(count[opt]);
