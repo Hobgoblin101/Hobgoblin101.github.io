@@ -202,6 +202,10 @@ function encode(input, nested){
         input = input.slice(0,i) + '<span class="opper">&lt</span>' + input.slice(i+1);
         i += 29;
         continue scan;
+      case '≈':
+        input = input.slice(0,i) + '<span class="opper">≈</span>' + input.slice(i+1);
+        i += 27;
+        continue scan;
       case ' ':
         input = input.slice(0, i) + input.slice(i+1);
         i--;
