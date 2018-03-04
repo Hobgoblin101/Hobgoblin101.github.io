@@ -492,7 +492,8 @@
           let end = start + this.size;
 
           let s = fs.createWriteStream(this.path, {
-            start, end
+            start, end,
+            flags: 'r+'
           });
           s.write(buff);
           s.close();
