@@ -2,7 +2,7 @@ const math = require('./math.js');
 let highlight = {
   typ: [
     'function ', 'func ', 'def ',
-    'var ', 'let '
+    'var ', 'let ', 'class '
   ],
   kwd: [
     'define ', 'const ', 'delete ',
