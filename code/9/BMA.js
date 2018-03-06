@@ -23,7 +23,7 @@ class BMA{
     }
 
     val = val == true;
-    let size = e -2;
+    let size = e - s;
 
     // Fills sect A
     if (s == 0 && e == this.size){
@@ -46,8 +46,8 @@ class BMA{
     // Collides with sect A
     // AND changing the value
     if (s < this.size && this.a != val){
-      let was = this.a;
       if (!(this.a instanceof BMA)){
+        let was = this.a;
         this.a = new BMA(this, this.size/2);
         this.a.a = this.a.b = was;
       }
@@ -57,11 +57,11 @@ class BMA{
     // Collides with sect B
     // AND changes the value
     if (e > this.size && this.b != val){
-      let was = this.b;
       s -= this.size;
       e -= this.size;
 
       if (!(this.b instanceof BMA)){
+        let was = this.b;
         this.b = new BMA(this, this.size/2);
         this.b.a = this.b.b = was;
       }
