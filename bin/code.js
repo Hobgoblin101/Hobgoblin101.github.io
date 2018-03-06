@@ -14,7 +14,7 @@ let highlight = {
   ],
   kwd: [ // Keywords
     'define', 'const', 'delete',
-    'return', 'yeild',
+    'return', 'yeild', 'throw',
     'if', 'else', 'elif', 'for',
     'continue', 'break',
     'in', 'of', 'is', 'not', 'and', 'or',
