@@ -31,6 +31,12 @@ code .lit{
 code .pun{
   color: #f8f8f0;
 }
+code .spe{
+  color: #FD971F;
+}
+code .cal{
+  color: #A6E22E;
+}
 
 
 
