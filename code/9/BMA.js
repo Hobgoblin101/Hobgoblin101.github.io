@@ -106,33 +106,49 @@ class BMA{
 
 
 
-    // Collision with A
-    let a = 0;
-    if (this.a instanceof BMA){
-      a = this.a.get(s, Math.min(this.size, e));
-    }else{
-      a = this.a ? 1 : -1;
+    let a = null;
+    let b = null;
+  
+    // If the request collides with branch A
+    if (s < this.size){
+      if (this.a instanceof BMA){
+        a = this.a.get(
+          s,
+          Math.min(this.size, e) // Ensure that the parsed end pointer isn't going out of the branch
+        );
+      }else{
+        a = this.a ? 1 : -1;
+      }
+  
+      if (a === 0){
+        return 0;
+      }
     }
-
-    if (a == 0){
-      return 0;
+  
+    // If the request collides with branch B
+    if (e > this.size){
+      if (this.b instanceof BMA){
+        b = this.b.get(s-this.size, e-this.size);
+      }else{
+        b = this.b ? 1 : -1;
+      }
+  
+      if (b === 0){
+        return 0;
+      }
     }
-
-    // Collision with B
-    let b = 0;
-    if (this.b instanceof BMA){
-      b = this.b.get(s-this.size, e-this.size);
-    }else{
-      b = this.b ? 1 : -1;
+  
+    
+  
+    // If one of the branches's didn't actually collide with the request
+    if (a === null){
+      return b;
     }
-
-    if (b == 0){
-      return 0;
+    if (b === null){
+      return a;
     }
-
-
-
-    if (a == b){
+  
+    if (a === b){
       return a;
     }else{
       return 0;
@@ -207,6 +223,8 @@ class BMA{
     }else if (b.size > a.size){
       b.pos += this.size;
       return b;
+    }else if (a.size === b.size){
+      return a;
     }
 
     throw new Error(`Uncaught Exception\n  a:${a}\n  b:${b}`);
