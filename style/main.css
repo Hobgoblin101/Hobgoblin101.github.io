@@ -90,11 +90,20 @@ blockquote{
 
 	padding: 0px 16px;
 	color: #6a737d;
-	border-left: 0.25em solid #dfe2e5;
+	border-left: 4px solid #dfe2e5;
 
 	margin: 0px;
 	margin-left: 20px;
 	margin-bottom: 16px;
+
+	transition-property: margin-left, border-left, background-color;
+	transition-duration: 0.2s, 0.2s, 0.2s;
+}
+blockquote:hover{
+	background-color: rgba(0,0,0,0.03);
+
+	border-left: 6px solid #dfe2e5;
+	margin-left: 18px;
 }
 
 break{
