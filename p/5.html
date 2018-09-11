@@ -28,7 +28,7 @@ Using our previous range as our max value, we will loop though every possible in
 We can now see that <code inline="true">20</code> is our best value, which is considerably smaller that our previous range of <code inline="true">11760000</code>. However, we still have a collision.</p><a name="Hashing Collision handling" class="target" href="#Hashing Collision handling" style="text-decoration:none;"><h2>Hashing Collision handling</h2></a><p>
 A way of dealing with hashing collisions is to store key and value pairs instead of just one or the other. Thus if we try and set a new value with the same hash as an existing one, we can recognise that the keys do not match, and then store the data in the next available slot.</br>
 Thus, also when we try and read by an index as a result of a hash, we can check if the keys match, and if not we can scan each proceeding slot until we find a match.</br>
-Also if we presume that data is never deleted we can terminate the scan if we find an empty slot, because if the data existed it would exist there.</p><span class="tags"><h6 style="display: inline-block;">Tags:</h6><a href="/t/IPT.html"><tag>IPT;</tag></a></span></article></div><footer>
+Also if we presume that data is never deleted we can terminate the scan if we find an empty slot, because if the data existed it would exist there.</p><span class="tags"><h6 style="display: inline-block;">Tags:</h6><a href="/t/IPT.html"><tag>IPT;</tag></a></span></div><footer>
 	<a href="https://goo.gl/forms/8wgwU9mPZlKogDEn2">Feedback</a>
 	<a href="/feed.rss" style="float:right">RSS Feed</a>
 </footer></body>
