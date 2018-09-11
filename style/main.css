@@ -32,6 +32,8 @@ h2{
 
 	border-bottom: 1px solid #ff5c8d;
 
+	margin: 19px 0px;
+
 	font-weight: 600;
 	font-size: 1.5em;
 
@@ -40,6 +42,7 @@ h2{
 }
 h2:hover{
 	border-bottom-width: 3px;
+	margin-bottom: 17px;
 }
 h3{
 	font-size: 1.25em;
@@ -78,6 +81,12 @@ p{
 }
 a{
 	color: #a00037;
+}
+:target::before {
+  content: "";
+  display: block;
+  height: 20px; /* fixed header height*/
+  margin: -20px 0 0; /* negative fixed header height */
 }
 
 blockquote{

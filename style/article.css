@@ -1,14 +1,14 @@
 .wrapper article{
-  width: auto;
+	width: auto;
 
-  display: block;
+	display: block;
 
-  padding: 5px 4% 20px 4%;
+	padding: 5px 4% 20px 4%;
 
-  border-bottom: #e2e2e2 3px solid;
+	border-bottom: #e2e2e2 3px solid;
 
-  transition-property: padding;
-  transition-duration: 0.2s;
+	transition-property: padding;
+	transition-duration: 0.2s;
 }
 @media (max-width: 700px){
 	.wrapper article{
@@ -17,84 +17,84 @@
 }
 
 .wrapper article:last-child{
-  border-bottom: none;
+	border-bottom: none;
 }
 .wrapper article:first-child{
-  border-bottom: #e2e2e2 3px solid;
+	border-bottom: #e2e2e2 3px solid;
 }
 
 .wrapper article .date{
-  display: inline-block;
+	display: inline-block;
 
-  font-size: 14px;
-  float: right;
+	font-size: 14px;
+	float: right;
 
-  text-align: right;
+	text-align: right;
 }
 .wrapper article a h3{
-  display: inline;
+	display: inline;
 }
 
 
 .wrapper article h3{
-  margin-top: 0px;
-  margin-bottom: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 }
 .wrapper article a{
-  text-decoration: none;
+	text-decoration: none;
 }
 
 
 .wrapper article .author{
-  grid-row-start: 2;
+	grid-row-start: 2;
 
-  margin-left: 5px;
-  margin-top: -5px;
+	margin-left: 5px;
+	margin-top: -5px;
 
-  color: #797979;
+	color: #797979;
 
-  grid-column-start: 1;
-  grid-column-end: span 2;
+	grid-column-start: 1;
+	grid-column-end: span 2;
 }
 
 
 .wrapper article p{
-  grid-row-start: 3;
+	grid-row-start: 3;
 
-  grid-column-start: 1;
-  grid-column-end: span 2;
+	grid-column-start: 1;
+	grid-column-end: span 2;
 
-  margin-top: 2px;
-  margin-bottom: 2px;
+	margin-top: 2px;
+	margin-bottom: 2px;
 }
 
 .tags{
-  grid-row-start: 4;
-  grid-column-start: 1;
-  grid-column-end: span 2;
+	grid-row-start: 4;
+	grid-column-start: 1;
+	grid-column-end: span 2;
 
-  color: #24292e;
+	color: #24292e;
 
-  text-align: right;
+	text-align: right;
 }
 .tags tag{
-  font-weight: 800;
-  font-size: 12px;
+	font-weight: 800;
+	font-size: 12px;
 
-  color: #24292e;
+	color: #24292e;
 
-  margin: 0px;
-  margin-left: 5px;
+	margin: 0px;
+	margin-left: 5px;
 
-  padding: 2px;
+	padding: 2px;
 }
 .tags tag:hover{
-  background-color: rgba(0, 0, 0, 0.05);
+	background-color: rgba(0, 0, 0, 0.05);
 }
 .tags a {
-  text-decoration: none;
+	text-decoration: none;
 }
 
 .wrapper article .tags{
-  margin-top: 10px;
+	margin-top: 10px;
 }
