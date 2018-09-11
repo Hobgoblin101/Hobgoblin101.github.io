@@ -6,7 +6,16 @@
   padding: 5px 4% 20px 4%;
 
   border-bottom: #e2e2e2 3px solid;
+
+  transition-property: padding;
+  transition-duration: 0.2s;
 }
+@media (max-width: 700px){
+	.wrapper article{
+		padding: 5px 4% 20px 2%;
+	}
+}
+
 .wrapper article:last-child{
   border-bottom: none;
 }
