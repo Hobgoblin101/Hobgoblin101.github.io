@@ -16,6 +16,14 @@ code[inline="true"]{
 	display: inline-block;
 	padding: 2px;
 	margin: 0px;
+
+	font-family: Cambria-Math;
+	font-style: italic;
+
+	font-size: inherit;
+
+	background-color: transparent;
+	color: inherit;
 }
 code:hover{
 	box-shadow: black 0px 0px 10px;
