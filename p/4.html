@@ -1,16 +1,17 @@
 <head><title>Key VS Value Hashing</title><meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#24292e">
+<meta name="theme-color" content="#d81b60">
 
 <link rel="stylesheet" type="text/css" href="/style/main.css">
 <link rel="stylesheet" type="text/css" href="/style/head.css">
 <link rel="stylesheet" type="text/css" href="/style/footer.css">
 <link rel="stylesheet" type="text/css" href="/style/article.css">
 <link rel="stylesheet" type="text/css" href="/style/snippet.css"></head><body><header>
-  <a href="/index.html">Home</a>
-  <a href="/p/me.html" style="float: right;">Ajani James Bilby</a>
-</header><div class="wrapper"><h1>Key VS Value Hashing</h1><p>Both Key and Value hashing aim to convert strings or any other data into a unique number. However, both do it in different ways to be optimal for their purposes.</p><a name="Value / Data hashing"><h2>Value / Data hashing</h2></a><p>
+	<a href="/index.html">Home</a>
+	<a href="/Feed.html">Feed</a>
+	<a href="/p/me.html" style="float: right;">Ajani James Bilby</a>
+</header><div class="wrapper"><h1>Key VS Value Hashing</h1><p>Both Key and Value hashing aim to convert strings or any other data into a unique number. However, both do it in different ways to be optimal for their purposes.</p><a name="Value / Data hashing" href="#Value / Data hashing" style="text-decoration:none;"><h2>Value / Data hashing</h2></a><p>
 Aims to encrypt data so it is a completely unique number of which is relatively impossible to work backwards (number to string). And there should be no encoding collisions.</br>
-Since these hashes are normally stored, the length of them is not to much of an issue.</p><break></break><a name="Key Hashing"><h2>Key Hashing</h2></a><p>
+Since these hashes are normally stored, the length of them is not to much of an issue.</p><break></break><a name="Key Hashing" href="#Key Hashing" style="text-decoration:none;"><h2>Key Hashing</h2></a><p>
 Allows objects to be stored as an array.</br>
 Say that you have a DNS object <code inline="true">{'google.com': '8.8.8.8', 'facebook.com': '31.13.95.36'}</code>.</br>
 If you have a ton of domain names, then to find the specific IP of a server requires you to scan all of the keys to find the correct one then return it's result.</br>
@@ -43,7 +44,7 @@ However, it is still important to remember that this is still a much better resu
 Also, our first algorithm given the same problem has only <code inline="true">1.176%</code> collision rate, but we cannot actually store any reasonable size strings.</p><break></break><p>
 All in all, you can see why it is valuable to have specific case-based hashing functions.</br>
 Possible solutions to some of the problems we have seen is using hashing to predict the location, but also storing the key along with the data, thus if a collision occurs the new value can be stored in the next empty index, of which can then be searched for when the predicted location does not match. Thus, you can get the speed ups of hashing while still storing a large variety of key values.</br></p><p>
-Another possible solution which can cause unpredictable results, is training a recursive neural network of example keys to generate values that do not conflict with one another, but still use the smallest amout of indexes possible. This effectively is like free loading of a general solution of which may not always work and will increase initial index prediction processing.</p><break></break><a name="Related"><h2>Related</h2></a><p><ul><li><a href="/p/5.html">Appendix: Key VS Value Hashing</a></li></ul></p><break></break><a name="References"><h2>References</h2></a><p><ol><li>James Curran (NCSS)</li></ol></p><span class="tags"><h6 style="display: inline-block;">Tags:</h6><a href="/t/IPT.html"><tag>IPT;</tag></a></span></article></div><footer>
-  <a href="https://goo.gl/forms/8wgwU9mPZlKogDEn2">Feedback</a>
-  <a href="/feed.rss" style="float:right">RSS Feed</a>
+Another possible solution which can cause unpredictable results, is training a recursive neural network of example keys to generate values that do not conflict with one another, but still use the smallest amout of indexes possible. This effectively is like free loading of a general solution of which may not always work and will increase initial index prediction processing.</p><break></break><a name="Related" href="#Related" style="text-decoration:none;"><h2>Related</h2></a><p><ul><li><a href="/p/5.html">Appendix: Key VS Value Hashing</a></li></ul></p><break></break><a name="References" href="#References" style="text-decoration:none;"><h2>References</h2></a><p><ol><li>James Curran (NCSS)</li></ol></p><span class="tags"><h6 style="display: inline-block;">Tags:</h6><a href="/t/IPT.html"><tag>IPT;</tag></a></span></article></div><footer>
+	<a href="https://goo.gl/forms/8wgwU9mPZlKogDEn2">Feedback</a>
+	<a href="/feed.rss" style="float:right">RSS Feed</a>
 </footer></body>

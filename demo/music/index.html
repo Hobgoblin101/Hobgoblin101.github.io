@@ -1,0 +1,52 @@
+<html>
+	<head>
+		<script>
+			let densityBasedColour  = false;
+			let pointMovementSpeed  = 0.03;
+			let pointTurningSpeed   = 0.6;
+			let pointMaxConnections = 3;
+			let pointDensity        = 0.000045;
+			let randomStartPoint    = true;
+			let drawPoints          = true;
+			let drawConnections     = true;
+			let useOnlyClosestConnection = false;
+		</script>
+	</head>
+	<body style="margin: 0px">
+		
+		<canvas id="heroBanner"></canvas>
+		<div id="overlay" style="position: absolute; top:0px; left:0px; right:0px; bottom:0px; box-shadow: inset 0px 0px 50px 0px black;"></div>
+
+		<div id="inputSpace" style="z-index: 3; position: absolute; top:0px; left:0px; background-color:white;">
+			<div>
+				<input type="file" id="audio" onchange="playFile(this)"/>
+			</div>
+			<div>
+				<span>Point Density: </span><input type="number" value="0.000045" onchange="pointDensity = this.value">
+			</div>
+			<div>
+				<span>Density Based Colour: </span><input type="checkbox" onchange="densityBasedColour = this.checked">
+			</div>
+			<div>
+				<span>Start Points Center: </span><input type="checkbox" onchange="randomStartPoint = !this.checked">
+			</div>
+			<div>
+				<span>Draw Points: </span><input type="checkbox" checked onchange="drawPoints = this.checked">
+			</div>
+			<div>
+				<span>Draw Connections: </span><input type="checkbox" checked onchange="drawConnections = this.checked">
+			</div>
+			<div>
+				<span>&nbsp; Max per point Connections: </span><input type="number" value="3" onchange="pointMaxConnections = this.value">
+			</div>
+			<div>
+				<span>Draw Connections by proxmitiy: </span><input type="checkbox" checked onchange="useOnlyClosestConnection = this.checked">
+			</div>
+			<div>
+				<audio id="sound" controls autostart="0"></audio>
+			</div>
+		</div>
+
+		<script src="./script.js"></script>
+	</body>
+</html>

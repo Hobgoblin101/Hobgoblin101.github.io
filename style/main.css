@@ -1,92 +1,123 @@
 body{
-  word-wrap: break-word;
-  font-family: "Segoe UI",Helvetica,Arial,sans-serif;
-  line-height: 1.5;
-  font-size: 16px;
+	word-wrap: break-word;
+	font-family: "Segoe UI",Helvetica,Arial,sans-serif;
+	line-height: 1.5;
+	font-size: 16px;
 
-  margin: 0px;
+	margin: 0px;
 }
+
+
 
 h1{
-  margin-top: 26px;
-  margin-bottom: 30px;
+	margin-top: 26px;
+	margin-bottom: 30px;
 
-  color: #24292e;
+	color: #24292e;
 
-  border-bottom: 1px solid #eaecef;
+	border-bottom: 2px solid #ff5c8d;
 
-  font-weight: 600;
-  font-size: 2em;
+	font-weight: 600;
+	font-size: 2.5em;
+
+	transition-property: border-bottom-width, margin-bottom;
+	transition-duration: 0.1s, 0.1s;
+}
+h1:hover{
+	border-bottom-width: 5px;
+	margin-bottom: 27px;
 }
 h2{
-  color: #24292e;
+	color: #24292e;
 
-  border-bottom: 1px solid #eaecef;
+	border-bottom: 1px solid #ff5c8d;
 
-  font-weight: 600;
-  font-size: 1.5em;
+	font-weight: 600;
+	font-size: 1.5em;
+
+	transition-property: border-bottom-width, margin-bottom;
+	transition-duration: 0.2s, 0.2s;
+}
+h2:hover{
+	border-bottom-width: 3px;
 }
 h3{
-  font-size: 1.25em;
-  color: #24292e;
+	font-size: 1.25em;
+	color: #24292e;
 
-  margin-bottom: -17px;
-  margin-left: 5px;
+	margin-bottom: -17px;
+	margin-left: 5px;
 }
 h4{
-  font-size: 1em;
-  color: #24292e;
+	font-size: 1em;
+	color: #24292e;
 }
 h5{
-  font-size: 0.875em;
-  color: #24292e;
+	font-size: 0.875em;
+	color: #24292e;
 }
 h6{
-  font-size: 0.85em;
-  color: #6a737d;
+	font-size: 0.85em;
+	color: #6a737d;
 }
+
+
 
 /*Ensure that the old HTML tags work*/
 del{
-  text-decoration: line-through;
+	text-decoration: line-through;
 }
 b{
-  font-weight: bold;
+	font-weight: bold;
 }
 i{
-  font-style: italic;
+	font-style: italic;
 }
 p{
-  padding-left: 10px;
+	padding-left: 10px;
 }
-
-break{
-  display: block;
-  border-bottom: #e1e4e8 4px solid;
-  margin: 30px 0px;
+a{
+	color: #a00037;
 }
 
 blockquote{
-  font-family: "Segoe UI",Helvetica,Arial,sans-serif;
-  word-wrap: break-word;
-  line-height: 1.5;
-  font-size: 16px;
+	font-family: "Segoe UI",Helvetica,Arial,sans-serif;
+	word-wrap: break-word;
+	line-height: 1.5;
+	font-size: 16px;
 
-  display: block;
+	display: block;
 
-  padding: 0px 16px;
-  color: #6a737d;
-  border-left: 0.25em solid #dfe2e5;
+	padding: 0px 16px;
+	color: #6a737d;
+	border-left: 0.25em solid #dfe2e5;
 
-  margin: 0px;
-  margin-bottom: 16px;
+	margin: 0px;
+	margin-left: 20px;
+	margin-bottom: 16px;
 }
+
+break{
+	display: block;
+	border-top: #a00037 1px solid;
+	margin: 50px 0px;
+
+	padding: 5px;
+
+	transition-property: margin, border-top;
+	transition-duration: 0.1s, 0.1s;
+}
+break:hover{
+	border-top: #a00037 3px solid;
+	margin: 50px 20px;
+}
+
 
 ul, ol{
-  margin-top: -18px;
+	margin-top: -18px;
 }
 ul ul, ul ol, ol ul, ol ol{
-  margin-top: 0px;
+	margin-top: 0px;
 }
 
 
@@ -94,8 +125,20 @@ ul ul, ul ol, ol ul, ol ol{
 
 
 .wrapper{
-  margin-left: 5px;
-  margin-right: 5px;
+	margin-left: 5px;
+	margin-right: 5px;
+
+	transition-property: margin;
+	transition-duration: 0.6s;
+	transition-delay: 0.1s;
+	transition-timing-function: cubic-bezier(0, 0.44, 0.5, 0.97);
+}
+
+@media (min-width: 700px){
+	.wrapper{
+		margin-left: 10%;
+		margin-right: 10%;
+	}
 }
 
 
@@ -107,39 +150,30 @@ ul ul, ul ol, ol ul, ol ol{
 
 
 table{
-  display: block;
+	display: block;
 
-  margin-top: 0px;
-  margin-bottom: 0px;
+	margin-top: 0px;
+	margin-bottom: 0px;
 
-  border-spacing: 0;
-  border-collapse: collapse;
+	border-spacing: 0;
+	border-collapse: collapse;
 
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 table tr{
-  background-color: #ffffff;
-  border-top: 1px solid #c6cbd1;
+	background-color: #ffffff;
+	border-top: 1px solid #c6cbd1;
 
-  box-sizing: border-box;
+	box-sizing: border-box;
 }
 table tr th{
-  font-weight: 600;
-  background-color: #ffffff;
+	font-weight: 600;
+	background-color: #ffffff;
 }
 table tr th, table tr td{
-  padding: 6px 13px;
-  border: 1px solid #dfe2e5;
+	padding: 6px 13px;
+	border: 1px solid #dfe2e5;
 }
 table tr:nth-child(2n){
-  background-color: #f6f8fa;
-}
-
-
-
-@media (min-width: 500px){
-  .wrapper{
-    margin-left: 10%;
-    margin-right: 10%;
-  }
+	background-color: #f6f8fa;
 }

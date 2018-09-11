@@ -89,23 +89,32 @@ function Compile(article){
 function BuildIndexPage(){
   let body = '<title>Index</title>';
 
-  body += '<div class="articles">'
+  body += '<div class="wrapper">'
   for (let entry of metaData){
     body += '<article>';
 
+    body += `<div class="meta">`
     body += `<a href="/p/${entry.name}.html"><h3>${entry.title}</h3></a>`;
     body += `<span class="date">${entry.date}</span>`;
+    body += `</div>`
     // body += `<span class="author">${entry.author}</span>`;
+    body += `<div class="content">`;
     body += `${entry.blurb}`;
+    body += `</div>`;
 
-    body += '<span class="tags">'
+    body += '<div class="tags">'
     for (tag of entry.tags){
       body += `<a href="/t/${tag}.html"><tag>${tag};</tag></a>`;
     }
-    body += '</span></article>';
+    body += '</div></article>';
   }
   body += '</div>';
 
+  fs.writeFileSync(
+    './../feed.html',
+    `<head>${head}</head><body>${header}${body}${footer}</body>`,
+    'utf8'
+  );
   fs.writeFileSync(
     './../index.html',
     `<head>${head}</head><body>${header}${body}${footer}</body>`,
@@ -114,7 +123,7 @@ function BuildIndexPage(){
 }
 function BuildIndexJSON(){
   fs.writeFileSync(
-    './../index.json',
+    './../feed.json',
     JSON.stringify(metaData),
     'utf8'
   );
@@ -123,7 +132,7 @@ function BuildTagPage(tag){
   let body = '';
   body += '<h2 style="margin-left: 3%;">Tag: '+tag+'</h2>';
 
-  body += '<div class="articles">'
+  body += '<div class="wrapper">'
   for (let entry of metaData){
     if (entry.tags.indexOf(tag) === -1){
       continue;

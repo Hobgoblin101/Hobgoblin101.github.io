@@ -1,45 +1,42 @@
-.articles article{
+.wrapper article{
   width: auto;
 
-  display: grid;
-
-  grid-template-columns: auto 74px;
+  display: block;
 
   padding: 5px 4% 20px 4%;
-  margin: 5px 6% 5px 6%;
 
   border-bottom: #e2e2e2 3px solid;
 }
-.articles article:last-child{
+.wrapper article:last-child{
   border-bottom: none;
 }
-.articles article:first-child{
+.wrapper article:first-child{
   border-bottom: #e2e2e2 3px solid;
 }
 
-.articles article .date{
-  grid-row: 1;
-  grid-column: 2;
+.wrapper article .date{
+  display: inline-block;
 
   font-size: 14px;
+  float: right;
 
   text-align: right;
 }
+.wrapper article a h3{
+  display: inline;
+}
 
 
-.articles article h3{
-  grid-row: 1;
-  grid-column: 1;
-
+.wrapper article h3{
   margin-top: 0px;
   margin-bottom: 0px;
 }
-.articles article a{
+.wrapper article a{
   text-decoration: none;
 }
 
 
-.articles article .author{
+.wrapper article .author{
   grid-row-start: 2;
 
   margin-left: 5px;
@@ -52,15 +49,15 @@
 }
 
 
-.articles article p{
+.wrapper article p{
   grid-row-start: 3;
 
   grid-column-start: 1;
   grid-column-end: span 2;
 
+  margin-top: 2px;
   margin-bottom: 2px;
 }
-
 
 .tags{
   grid-row-start: 4;
@@ -87,4 +84,8 @@
 }
 .tags a {
   text-decoration: none;
+}
+
+.wrapper article .tags{
+  margin-top: 10px;
 }

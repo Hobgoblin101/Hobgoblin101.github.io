@@ -7,5 +7,5 @@ Details about myself
 ---
 
 [LinkedIn](https://www.linkedin.com/in/ajani-b-00ba15156/)  
-[GitHub](https://github.com/Hobgoblin101)  
+[GitHub](https://github.com/AjaniBilby)  
 [NPM](https://www.npmjs.com/~hobgoblin101)
