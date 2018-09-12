@@ -13,6 +13,6 @@ Details about myself
 4. HTML/CSS
 
 ## Other Services
-[LinkedIn](https://www.linkedin.com/in/ajani-b-00ba15156/)  
-[GitHub](https://github.com/AjaniBilby)  
+[ ![Linked-in Logo](/img/linkedin-logo.png) ](https://www.linkedin.com/in/ajani-b-00ba15156/)  
+[ ![Github Logo](/img/github-logo.png) ](https://github.com/AjaniBilby)  
 [NPM](https://www.npmjs.com/~hobgoblin101)
