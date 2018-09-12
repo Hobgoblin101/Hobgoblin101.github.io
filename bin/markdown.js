@@ -278,7 +278,7 @@ function encode(input,nested){
 				}
 
 				if (d != -1){
-					insert = `<img href="${t.slice(c+1, d)}" alt="${t.slice(a+1,b)}" />`;
+					insert = `<img src="${t.slice(c+1, d)}" alt="${t.slice(a+1,b)}" />`;
 					t = t.slice(0, i) + insert + t.slice(d+1);
 					i += insert.length-1;
 
