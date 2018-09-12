@@ -87,9 +87,7 @@ function Compile(article){
 
 
 function BuildIndexPage(){
-	let body = '<title>Index</title>';
-
-	body += '<div class="wrapper">'
+	let body = '<div class="wrapper">';
 	for (let entry of metaData){
 		body += '<article>';
 
@@ -112,12 +110,12 @@ function BuildIndexPage(){
 
 	fs.writeFileSync(
 		'./../feed.html',
-		`<head>${head}</head><body>${header}${body}${footer}</body>`,
+		`<head>${head}<title>Index</title></head><body>${header}${body}${footer}</body>`,
 		'utf8'
 	);
 	fs.writeFileSync(
 		'./../index.html',
-		`<head>${head}</head><body>${header}${body}${footer}</body>`,
+		`<head>${head}<title>Index</title></head><body>${header}${body}${footer}</body>`,
 		'utf8'
 	);
 }
@@ -154,14 +152,12 @@ function BuildTagPage(tag){
 
 	return fs.writeFileSync(
 		`./../t/${tag}.html`,
-		`<head>${head}</head><body>${header}${body}${footer}</body>`,
+		`<head>${head}<title>Tag: ${tag}</title></head><body>${header}${body}${footer}</body>`,
 		'utf8'
 	);
 }
 function BuildTagList(){
-	let body = '<title>Index</title>';
-
-	body += '<div class="wrapper"><span class="tags"><h6 style="display: inline-block;">Tags:</h6>'
+	let body = '<div class="wrapper"><span class="tags"><h6 style="display: inline-block;">Tags:</h6>';
 	for (let tag of tags){
 		body += `<a href="/t/${tag}.html"><tag>${tag};</tag></a>`;
 	}
@@ -170,7 +166,7 @@ function BuildTagList(){
 
 	return fs.writeFileSync(
 		`./../tags.html`,
-		`<head>${head}</head><body>${header}${body}${footer}</body>`,
+		`<head>${head}<title>Tags</title></head><body>${header}${body}${footer}</body>`,
 		'utf8'
 	);
 }

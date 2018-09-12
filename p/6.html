@@ -9,21 +9,21 @@
 	<a href="/index.html">Home</a>
 	<a href="/feed.html">Feed</a>
 	<a href="/p/me.html" style="float: right;">Ajani James Bilby</a>
-</header><div class="wrapper"><h1>Object Orientated Database (Static Schema)</h1><p>Since object orrientated databases are an evolution of Relational table DMBS, it is best to understand <a href="/p/3.html">RDMBSs</a> before you try to understand OODBs.</p><a name="Structures" class="target" href="#Structures" style="text-decoration:none;"><h2>Structures</h2></a><p>
-A OODB schema can be broken down into different sub-sections called structures.</br>
-Each structure is like a description of a tuple. It describes the name of each attribute as well as it's type.</br></p><p>
+</header><div class="wrapper"><h1>Object Orientated Database (Static Schema)</h1><p>Since object-oriented databases are an evolution of Relational table DMBS, it is best to understand <a href="/p/3.html">RDMBSs</a> before you try to understand OODBs.</p><a name="Structures" class="target" href="#Structures" style="text-decoration:none;"><h2>Structures</h2></a><p>
+An OODB schema can be broken down into different sub-sections called structures.</br>
+Each structure is like a description of a tuple. It describes the name of each attribute as well as it's data type.</br></p><p>
 For instance, you can describe the structure of a database of which stores GPS locations like so;
-<code>gps&nbsp{<br>&nbsp&nbsplatt:&nbspfloat<span class="lit">3</span><span class="lit">2</span>,<br>&nbsp&nbsplong:&nbspfloat<span class="lit">3</span><span class="lit">2</span>,<br>&nbsp&nbspalt:&nbspfloat<span class="lit">3</span><span class="lit">2</span><br>}<br><br>root&nbsp{<br>&nbsp&nbsplocations:&nbspgps[]<br>}</code></p><p>
-You can see that within locations you can store the individual locations the same as you would a tuple within a table. However, the interesting problem is how you handle having more than one unset length array. How can each of them infinitely expand without colliding with each other.</p><a name="N-Length Arrays" class="target" href="#N-Length Arrays" style="text-decoration:none;"><h2>N-Length Arrays</h2></a><p>
+<code>GPS&nbsp{<br>&nbsp&nbsplatt:&nbspfloat<span class="lit">3</span><span class="lit">2</span>,<br>&nbsp&nbsplong:&nbspfloat<span class="lit">3</span><span class="lit">2</span>,<br>&nbsp&nbspalt:&nbspfloat<span class="lit">3</span><span class="lit">2</span><br>}<br><br>root&nbsp{<br>&nbsp&nbsplocations:&nbspgps[]<br>}</code></p><p>
+You can see that within locations you can store the individual locations the same as you would a tuple within a table. However, the interesting problem is how you handle having more than one unset length array. How can each of them infinitely expand without colliding with each other?</p><a name="N-Length Arrays" class="target" href="#N-Length Arrays" style="text-decoration:none;"><h2>N-Length Arrays</h2></a><p>
 The simplest way is to chunk the array.</br>
-In this case we will pick a chunk size of <code inline="true">50</code>. This means that when the array is initiated it will allocate <code inline="true">50 × gps.size + 8</code> bytes.</br>
+In this case, we will pick a chunk size of <code inline="true">50</code>. This means that when the array is initiated it will allocate <code inline="true">50 × GPS.size + 8</code> bytes.</br>
 This means that the array now has 50 empty slots to fill, once these slots are filled, you can then use the last 6 bytes as a direct pointer to the start of another chunk.</br>
 Thus, you can continuously expand your array without conflicting with any other arrays.</br></p><blockquote><p>It can be beneficial to add structure set chunk sizes.
-For instance if you have an array with a list of all accounts on a website, then you should have your default chunk size quite large to have less pointers,
+For instance if you have an array with a list of all accounts on a website, then you should have your default chunk size quite large to have fewer pointers,
 However if those accounts then have their own array, i.e. friends, they do not need their chunk size to be so big, since it would be a waste to have massive chunks for only a few items.
 Personally I prefer the syntax for such arrays to be like this <code inline="true">arr[~chunksize]</code>
 </p></blockquote><a name="Pointer" class="target" href="#Pointer" style="text-decoration:none;"><h2>Pointer</h2></a><p>
-This allows you to directly reference other data. This is done by storing the exact byte index of where the target starts, as well as what data type is there, so that it can be read properly.</br></p><blockquote><p>It is recommended to state that something is a reference via having a leading <code inline="true">&</code>, since that follows on the pre-existing standards created by C
+This allows you to directly reference other data. This is done by storing the exact byte index of where the target starts, as well as what data type is there so that it can be read properly.</br></p><blockquote><p>It is recommended to state that something is a reference via having a leading <code inline="true">&</code>, since that follows on the pre-existing standards created by C
 </p></blockquote><p>
 This example shows how you can have a list of people, and reference all their friends so that you can read their data easily.
 <code>person:&nbsp{<br>&nbsp&nbspgiven:&nbspstring[<span class="lit">1</span><span class="lit">5</span>],<br>&nbsp&nbspfamily:&nbspstring[<span class="lit">1</span><span class="lit">5</span>],<br>&nbsp&nbspstreet:&nbspstring[<span class="lit">3</span><span class="lit">0</span>],<br>&nbsp&nbspsuburb:&nbspstring[<span class="lit">1</span><span class="lit">0</span>],<br>&nbsp&nbspstate:&nbspstring[<span class="lit">4</span>],<br>&nbsp&nbspfriends:&nbsp<span class="kwd">&</span>person[~<span class="lit">5</span>]<br>}<br><br>root{<br>&nbsp&nbsppeople:&nbspperson[~<span class="lit">5</span><span class="lit">0</span>]<br>}</code>
