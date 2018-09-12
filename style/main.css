@@ -5,6 +5,9 @@ body{
 	font-size: 16px;
 
 	margin: 0px;
+
+	--color-primary: #d81b60;
+	--color-secondary: #ff5c8d; 
 }
 
 
@@ -15,7 +18,7 @@ h1{
 
 	color: #24292e;
 
-	border-bottom: 2px solid #ff5c8d;
+	border-bottom: 2px solid var(--color-secondary);
 
 	font-weight: 600;
 	font-size: 2.5em;
@@ -30,7 +33,7 @@ h1:hover{
 h2{
 	color: #24292e;
 
-	border-bottom: 1px solid #ff5c8d;
+	border-bottom: 1px solid var(--color-secondary);
 
 	margin: 19px 0px;
 
@@ -80,7 +83,7 @@ p{
 	padding-left: 10px;
 }
 a{
-	color: #a00037;
+	color: var(--color-primary);
 }
 :target::before {
   content: "";
@@ -117,7 +120,7 @@ blockquote:hover{
 
 break{
 	display: block;
-	border-top: #a00037 1px solid;
+	border-top: var(--color-primary) 1px solid;
 	margin: 50px 0px;
 
 	padding: 5px;
@@ -126,7 +129,7 @@ break{
 	transition-duration: 0.1s, 0.1s;
 }
 break:hover{
-	border-top: #a00037 3px solid;
+	border-top: var(--color-primary) 3px solid;
 	margin: 50px 20px;
 }
 

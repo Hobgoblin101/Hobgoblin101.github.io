@@ -137,16 +137,20 @@ function BuildTagPage(tag){
 
 		body += '<article>';
 
+		body += `<div class="meta">`
 		body += `<a href="/p/${entry.name}.html"><h3>${entry.title}</h3></a>`;
 		body += `<span class="date">${entry.date}</span>`;
+		body += `</div>`
 		// body += `<span class="author">${entry.author}</span>`;
+		body += `<div class="content">`;
 		body += `${entry.blurb}`;
+		body += `</div>`;
 
-		body += '<span class="tags">'
+		body += '<div class="tags">'
 		for (let tag of entry.tags){
 			body += `<a href="/t/${tag}.html"><tag>${tag};</tag></a>`;
 		}
-		body += '</span></article>';
+		body += '</div></article>';
 	}
 	body += '</div>';
 
