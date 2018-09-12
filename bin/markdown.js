@@ -198,13 +198,20 @@ function encode(input,nested){
 			*/
 			a = i;
 
-			search:
-			for (b=a; b<t.length; b++){
-				if (t[b] == ']'){
-					break search;
+			let count = 0;
+			b = -1;
+			search: for (b=a; b<t.length; b++){
+				if (t[b] == '['){
+					count++;
+				}else if (t[b] == ']'){
+					count--;
 				}else if (t[b] == '\n'){
 					b = -1;
-					break;
+					break search;
+				}
+
+				if (count == 0){
+					break search;
 				}
 			}
 
