@@ -16,9 +16,6 @@ header{
 
 	box-shadow: black 0px 0px 10px;
 }
-header:hover{
-
-}
 
 header a{
 	color: white;
@@ -32,10 +29,9 @@ header a{
 
 	background-color: transparent;
 
-	transition-property: background-color, box-shadow;
-	transition-duration: 0.2s, 0.2s;
+	transition-property: box-shadow;
+	transition-duration: 0.2s;
 }
 header a:hover{
-	background-color: rgba(0,0,0,0.1);
 	box-shadow: black 0px 0px 10px;
 }
