@@ -3,7 +3,7 @@ let special = '%^&*{}-=+/|=<>';
 
 trim = function(str){
 	// Find the first non-whitespace character
-	let i=0
+	let i=0;
 	for (; i<str.length; i++){
 		if (str[i] == " " || str[i] == "\t" || str[i] == "\n" || str[i] == "\r"){
 			continue;
@@ -13,8 +13,8 @@ trim = function(str){
 	}
 
 	// Find the last non-whitespace character
-	let j = str.length;
-	for (; j>0; j--){
+	let j = str.length-1;
+	for (; j>i; j--){
 		if (str[j] == " " || str[j] == "\t" || str[j] == "\n" || str[j] == "\r"){
 			continue;
 		}
@@ -22,7 +22,7 @@ trim = function(str){
 		break;
 	}
 
-	return str.slice(i, j);
+	return str.slice(i, j+1);
 };
 
 
@@ -235,6 +235,7 @@ class Tokens{
 				continue;
 			}
 
+			// out.push(`<span class="variable">${trim(this.t[i])}</span>`);
 			out.push(`<span class="variable">${this.t[i]}</span>`);
 		}
 
