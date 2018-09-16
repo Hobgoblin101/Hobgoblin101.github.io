@@ -1,256 +1,260 @@
-function encode(input, nested){
-	input = input.replace(/<=/g, '≤').replace(/>=/g, '≥').replace(/<</g, '≪').replace(/>>/g, '≫')
-		.replace(/\+\/-/g, '±').replace(/-\/\+/g, '∓');
+let special = '%^&*{}-=+/|=<>';
 
-	let insert = '';
-	let dep = 0; // Depth
-	let a = 0;
-	let b = 0;
-	let c = 0;
-	let d = 0;
 
-	let s = -1;
-	
-	scan:
-	for (let i=0; i<input.length; i++){
-		// Resolve unhandled nests
-		if (s != -1 && dep == 0 && input[i-1] == ')'){
-			i -= 1;
-
-			let insert = '('+ encode(input.slice(s+1, i), true);
-			input = input.slice(0, s) + insert + input.slice(i);
-			i = (s) + insert.length; // Move scanner to the end of the insert
-			s = -1; // Make this braket resolved
-
-			continue scan;
+trim = function(str){
+	// Find the first non-whitespace character
+	let i=0
+	for (; i<str.length; i++){
+		if (str[i] == " " || str[i] == "\t" || str[i] == "\n" || str[i] == "\r"){
+			continue;
 		}
 
-		// Only work at the current depth
-		switch (input[i]){
-			case '(':
-				if (dep == 0){
-					s = i;
-				}
-
-				dep += 1;
-				continue scan;
-			case ')':
-				dep -= 1;
-				continue scan;
-		}
-
-		if (dep !== 0){
-			continue scan;
-		}
-
-		switch (input[i]){
-			case '\\':
-				let hasLine = input[i+1] == '\\' ? 't' : 'f';
-
-				// End the end of the numerator
-				search:
-				for (b=i; b>0; b--){
-					if (input[b] == ')'){
-						break search;
-					}
-				}
-
-				// Find the beginning of the numerator
-				dep = 0;
-				search:
-				for (a=b; a>0; a--){
-					if (input[a] == ')'){
-						dep += 1;
-					}
-
-					if (input[a] == '('){
-						dep -= 1;
-
-						if (dep === 0){
-							break search;
-						}
-					}
-				}
-
-				// Find the beginning of the denominator
-				search:
-				for (c=i; c<input.length; c++){
-					if (input[c] == '('){
-						break search;
-					}
-				}
-
-				// Find the end of the denominator
-				dep = 0;
-				search:
-				for (d=c; d<input.length; d++){
-					if (input[d] == '('){
-						dep += 1;
-					}else if (input[d] == ')'){
-						dep -= 1;
-
-						if (dep === 0){
-							break search;
-						}
-					}
-				}
-
-				a += 1;
-				c += 1;
-
-				insert = `<span class="fract" w="${hasLine}"><sup>${input.slice(a, b)}</sup><sub>${encode(input.slice(c, d))}</sub></span>`;
-				input = input.slice(0, a-1) + insert + input.slice(d+1);
-				i = a + insert.length-2;
-
-				continue scan;
-		
-			case '^':
-				// End the end of the numerator
-				search:
-				for (b=i; b>0; b--){
-					if (input[b] == ')'){
-						break search;
-					}
-				}
-
-				// Find the beginning of the numerator
-				dep = 0;
-				search:
-				for (a=b; a>0; a--){
-					if (input[a] == ')'){
-						dep += 1;
-					}
-
-					if (input[a] == '('){
-						dep -= 1;
-
-						if (dep === 0){
-							break search;
-						}
-					}
-				}
-
-				// Find the beginning of the denominator
-				search:
-				for (c=i; c<input.length; c++){
-					if (input[c] == '('){
-						break search;
-					}
-				}
-
-				// Find the end of the denominator
-				dep = 0;
-				search:
-				for (d=c; d<input.length; d++){
-					if (input[d] == '('){
-						dep += 1;
-					}else if (input[d] == ')'){
-						dep -= 1;
-
-						if (dep === 0){
-							break search;
-						}
-					}
-				}
-
-				a += 1;
-				c += 1;
-
-				insert = `<span class="pow"><span class="base">${input.slice(a, b)}</span><sup>${encode(input.slice(c, d), true)}</sup></span>`;
-				input = input.slice(0, a-1) + insert + input.slice(d+1);
-				i = a + insert.length-2;
-
-				continue scan;    
-
-			case '/':
-				input = input.slice(0,i) + '<span class="opper">÷</span>' + input.slice(i+1);
-				i += 27;
-				continue scan;
-			case '*':
-				input = input.slice(0,i) + '<span class="opper">×</span>' + input.slice(i+1);
-				i += 27;
-				continue scan;
-			case '+':
-				input = input.slice(0,i) + '<span class="opper">+</span>' + input.slice(i+1);
-				i += 27;
-				continue scan;
-			case '-':
-				input = input.slice(0,i) + '<span class="opper">-</span>' + input.slice(i+1);
-				i += 27;
-				continue scan;
-			case '%':
-				input = input.slice(0,i) + '<span class="opper">%</span>' + input.slice(i+1);
-				i += 27;
-				continue scan;
-			case '&':
-				input = input.slice(0,i) + '<span class="opper">&</span>' + input.slice(i+1);
-				i += 27;
-				continue scan;
-			case '=':
-				input = input.slice(0,i) + '<span class="opper">=</span>' + input.slice(i+1);
-				i += 27;
-				continue scan;
-			case '!':
-				input = input.slice(0,i) + '<span class="opper">÷</span>' + input.slice(i+1);
-				i += 27;
-				continue scan;
-			case '<':
-				input = input.slice(0,i) + '<span class="opper">&gt</span>' + input.slice(i+1);
-				i += 29;
-				continue scan;
-			case '>':
-				input = input.slice(0,i) + '<span class="opper">&lt</span>' + input.slice(i+1);
-				i += 29;
-				continue scan;
-			case '≈':
-				input = input.slice(0,i) + '<span class="opper">≈</span>' + input.slice(i+1);
-				i += 27;
-				continue scan;
-			case ' ':
-				input = input.slice(0, i) + input.slice(i+1);
-				i--;
-				continue;
-		
-			case 's':
-				if (input.slice(i, i+5) == 'sqrt('){
-					a = i+5;
-
-					// Find the end of the sqrt
-					dep = 0;
-					search:
-					for (b=a-1; b<input.length; b++){
-						if (input[b] == '('){
-							dep += 1;
-						}else if (input[b] == ')'){
-							dep -= 1;
-
-							if (dep == 0){
-								break search;
-							}
-						}
-					}
-					dep = 0;
-
-					insert = `√<span class="sqrt">${encode(input.slice(a, b))}</span>`;
-					input = input.slice(0, i) + insert + input.slice(b+1);
-					i += insert.length-1;
-
-					continue scan;
-				}
-		}
-
-		// Must be a number / or algebra
-		input = input.slice(0,i) + '<span class="char">'+input[i]+'</span>' + input.slice(i+1);
-		i += 26;
-		continue scan;
+		break;
 	}
 
-	return input;
+	// Find the last non-whitespace character
+	let j = str.length;
+	for (; j>0; j--){
+		if (str[j] == " " || str[j] == "\t" || str[j] == "\n" || str[j] == "\r"){
+			continue;
+		}
+
+		break;
+	}
+
+	return str.slice(i, j);
+};
+
+
+let opperator = [
+	'{', '}',
+	'\\\\', "\\", 
+	'<=', '>=',
+	'>',  "<",
+	'!=', ':=', "=",
+	"+", "-",
+	"/", "*",
+	"&", "|",
+	"^", 'sqrt'
+];
+function GetOpperatorID(str){
+	search: for (let i=0; i<opperator.length; i++){
+
+		for (let j=0; j<opperator[i].length; j++){
+			if (j >= str.length){
+				continue search;
+			}
+
+			if (str[j] != opperator[i][j]){
+				continue search;
+			}
+		}
+		return i;
+	}
+
+	return -1;
 }
+
+
+class Tokens{
+	constructor(str){
+		if (typeof(str) == "string"){
+			this.t = [];
+
+			// Split into tokens
+			let forward = '';
+			let l = 0;
+			let oppID = -1;
+			for (let i=0; i<str.length; i++){
+				oppID = GetOpperatorID(str.slice(i, i+4));
+
+				if (oppID != -1){
+					forward = trim( str.slice(l, i) );
+					if (forward.length > 0){
+						this.t.push(forward);
+					}
+					this.t.push(opperator[oppID]);
+
+					i += opperator[oppID].length -1;
+					l = i+1;
+				}
+			}
+			forward = trim( str.slice(l) );
+			if (forward.length > 0){
+				this.t.push(forward);
+			}
+		}else{
+			this.t = str;
+		}
+
+		// Split tokens into sub-groups
+		for (let i=0; i<this.t.length; i++){
+			if (this.t[i] == "{"){
+				let count = 1;
+				let l=i+1;
+
+				for (; l<this.t.length; l++){
+					if (this.t[l] == "{"){
+						count++;
+					}else if (this.t[l] == "}"){
+						count--;
+					}
+
+					if (count < 1){
+						break;
+					}
+				}
+
+				let forward = trim( this.t.slice(i+1, l) );
+				this.t[i] = new Tokens(forward);
+				this.t.splice(i+1, l-i);
+
+			}
+		}
+	}
+
+	toHTML(){
+		let out = [];
+
+		for (let i=0; i<this.t.length; i++){
+			// Opperators
+			if (this.t[i] == '+'){
+				out.push(`<span class="opper">+</span>`);
+				continue;
+			}
+			if (this.t[i] == '-'){
+				out.push(`<span class="opper">-</span>`);
+				continue;
+			}
+			if (this.t[i] == '*'){
+				out.push(`<span class="opper">&times;</span>`);
+				continue;
+			}
+			if (this.t[i] == '/'){
+				out.push(`<span class="opper">&divide;</span>`);
+				continue;
+			}
+
+			if (this.t[i] == '%'){
+				out.push(`<span class="opper">%</span>`);
+				continue;
+			}
+			if (this.t[i] == '&'){
+				out.push(`<span class="opper">&amp;</span>`);
+				continue;
+			}
+			if (this.t[i] == '|'){
+				out.push(`<span class="opper">|</span>`);
+				continue;
+			}
+
+			if (this.t[i] == '^'){
+				// Consume the previous and next item
+				let j = out.length-1;
+				let prev = out.splice(j, 1)[0];
+				let nxt = this.t[i+1];
+				if (nxt instanceof Tokens){
+					nxt = nxt.toHTML();
+				}
+				out.push(`<span class="power"><span class="base">${prev}</span><span class="exponent">${nxt}</span></span>`);
+				i++;
+
+				continue;
+			}
+			if (this.t[i] == '\\'){
+				// Consume the previous and next item
+				let j = out.length-1;
+				let prev = out.splice(j, 1)[0];
+				let nxt = this.t[i+1];
+				if (nxt instanceof Tokens){
+					nxt = nxt.toHTML();
+				}
+				out.push(`<span class="fraction"><span class="top">${prev}</span><span class="bottom">${nxt}</span></span>`);
+				i++;
+
+				continue;
+			}
+			if (this.t[i] == '\\\\'){
+				// Consume the previous and next item
+				let j = out.length-1;
+				let prev = out.splice(j, 1)[0];
+				let nxt = this.t[i+1];
+				if (nxt instanceof Tokens){
+					nxt = nxt.toHTML();
+				}
+				out.push(`<span class="fraction" w="t"><span class="top">${prev}</span><span class="bottom">${nxt}</span></span>`);
+				i++;
+
+				continue;
+			}
+			if (this.t[i] == "sqrt"){
+				// Consume the previous and next item
+				let j = out.length-1;
+				let nxt = this.t[i+1];
+				if (nxt instanceof Tokens){
+					nxt = nxt.toHTML();
+				}
+				out.push(`<span class="fraction" w="t"><span class="top">${prev}</span><span class="bottom">${nxt}</span></span>`);
+				i++;
+				
+				continue;
+			}
+
+			if (this.t[i] == '<='){
+				out.push(`<span class="opper">&le;</span>`);
+				continue;
+			}
+			if (this.t[i] == '>='){
+				out.push(`<span class="opper">&ge;</span>`);
+				continue;
+			}
+			if (this.t[i] == '<'){
+				out.push(`<span class="opper>&lt;<span>`);
+				continue;
+			}
+			if (this.t[i] == '>'){
+				out.push(`<span class="opper">&gt;</span>`);
+				continue;
+			}
+
+			if (this.t[i] == '='){
+				out.push(`<span class="opper">=</span>`);
+				continue;
+			}
+			if (this.t[i] == ':='){
+				out.push(`<span class="opper">&asymp;</span>`);
+				continue;
+			}
+			if (this.t[i] == '!='){
+				out.push(`<span class="opper">&ne;</span>`);
+				continue;
+			}
+
+			if (this.t[i] instanceof Tokens){
+				out.push(this.t[i].toHTML());
+				continue;
+			}
+
+			out.push(`<span class="variable">${this.t[i]}</span>`);
+		}
+
+		return out.join('');
+	}
+}
+
+
+function encode(line, nested=false){
+	let r = new Tokens(line);
+	console.log(r);
+
+	console.log(r.toHTML());
+	return r.toHTML();
+}
+
 
 module.exports = {
 	encode: (input)=>{
-		input = input.split('\n');
+		input = input.split('\n').slice(0, -1);
 		let res = '';
 
 		for (let eq of input){
@@ -260,3 +264,6 @@ module.exports = {
 		return res;
 	}
 }
+
+
+encode("a + { b + c *{ d } } := 4 != 3");

@@ -32,10 +32,10 @@ Documentation on how to use my custom blog system
 
 ### Maths
 ```math
-x = (-b +/- sqrt((b)^(2)-4ac)) \ (2a)
-water = H ()\\(2) O
-1 / 4 = (1)\(4)
-1 + (3)\\() sqrt(8) = 3
+a + b * c / d := e
+a ^ e ^ f +1<=2^{2e}
+34 \ 76 + 3
+{ b {+}\\{-} }\{2a}
 ```
 
 ### Programming

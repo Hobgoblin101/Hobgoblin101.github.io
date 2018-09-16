@@ -60,7 +60,7 @@ code .cal{
 
 
 code[type=eq]{
-	font-family: 'Cambria Math', 'Times New Roman';
+	font-family: 'Cambria Math', 'Cambria', 'Times New Roman';
 	font-size: 17px;
 	font-weight: 500;
 
@@ -73,19 +73,27 @@ code[type=eq]{
 }
 
 code[type=eq] .row{
-	display: flex;
+	display: block;
+	min-height: 10px;
+	margin: 5px 0px;
+}
+code[type=eq] .row *{
 	vertical-align: middle;
 }
-code[type=eq] .row .char{
-	margin-top: auto;
-	margin-bottom: auto;
+
+
+
+code[type="eq"] .power {
+	display: inline-block;
 }
-
-
-
-code[type="eq"] sub, code[type="eq"] sup{
+code[type="eq"] .row .power .base{
+	display: inline-block;
+	margin-top: 7px;
+}
+code[type="eq"] .power .exponent{
+	display: inline-block;
+	vertical-align: top;
 	font-size: 15px;
-	min-height: 15px;
 }
 
 
@@ -97,7 +105,7 @@ code[type=eq] .sqrt{
 
 
 code[type="eq"] .opper{
-	font-size: 16px;
+	/* font-size: 16px; */
 	font-weight: 1000;
 
 	margin-top: auto;
@@ -108,38 +116,29 @@ code[type="eq"] .opper{
 
 
 
-
-.pow{
-	margin-top: auto;
-	margin-bottom: auto;
-}
-
-
-
-
-code[type=eq] .fract{
-	font-size: 10px;
-	text-align: center;
-}
-code[type=eq] .fract sup{
+code[type=eq] .fraction{
 	display: inline-block;
-	padding: 0px 2px;
-
-	margin-bottom: -2px;
+	text-align: center;
+	font-size: 15px;
 }
-code[type=eq] .fract sub{
+code[type=eq] .fraction .top{
+	padding: 0px 5px;
+}
+code[type=eq] .fraction .bottom{
+	margin-top: -2px;
+	border-top: 1px solid #000;
+	padding: 0px 5px;
 	display: block;
-
-	border-top: solid black 1px;
 }
 
-code[type=eq] .fract[w=t] sup{
-	margin-bottom: -5px;
-	padding: 0px;
 
+code[type=eq] .fraction[w=t] .top{
 	text-align: left;
+	padding: 0px 2px 0px 0px;
 }
-code[type=eq] .fract[w=t] sub{
-	text-align: left;
+code[type=eq] .fraction[w=t] .bottom{
+	margin-top: -10px;
+	padding: 0px 2px 0px 0px;
 	border-top: none;
+	text-align: left;
 }
