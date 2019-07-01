@@ -14,6 +14,8 @@ header{
 
 	color: white;
 
+	z-index: 1000;
+
 	box-shadow: black 0px 0px 10px;
 }
 
