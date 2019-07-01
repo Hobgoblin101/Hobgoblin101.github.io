@@ -7,15 +7,19 @@ canvas.width = canvasWidth;
 canvas.height = canvasHeight;
 
 
+let dotColour = "#ff5c8d";
+// let dotColour = "#c72160";
 
-let pointMovementSpeed = 0;
-let pointTurningSpeed = 0;
+
+
+let pointMovementSpeed = 0.1;
+let pointTurningSpeed = 0.4;
 let varyMovement = true;
 
 
 
-let flockRange = 10000;
-let avoidRange = flockRange/2;
+let flockRange = 30000;
+let avoidRange = flockRange/3;
 let randomStartPoint = true;
 let points = [];
 
@@ -34,7 +38,7 @@ class Point{
 		}
 
 		this.direction = new Vector(
-			Math.random()-0.5, 
+			Math.random()-0.5,
 			Math.random()-0.5
 		);
 		this.direction.normalize();
@@ -88,7 +92,7 @@ class Point{
 		aim.add(avoid);
 
 		aim.normalize();
-		
+
 		// Change the direction of the particle
 		this.direction.x += aim.x*pointTurningSpeed*dt;
 		this.direction.y += aim.y*pointTurningSpeed*dt;
@@ -118,12 +122,11 @@ class Point{
 
 	draw(){
 		ctx.shadowBlur = 5;
-		ctx.shadowColor = "white";
-		ctx.fillStyle = "rgb(255,255,255)";
+		ctx.fillStyle = ctx.shadowColor = dotColour;
 		ctx.beginPath();
 		ctx.arc(
 			this.position.x, this.position.y,
-			2,
+			4,
 			0, 2*Math.PI
 		);
 		ctx.fill();
@@ -133,10 +136,6 @@ class Point{
 
 
 let last = Date.now();
-
-ctx.fillStyle = "rgba(10,10,10, 1)";
-ctx.rect(0, 0, canvasWidth, canvasHeight);
-ctx.fill();
 
 function Draw(){
 	let now = Date.now();
@@ -164,14 +163,12 @@ function Draw(){
 	}
 
 	// Clear the view
-	ctx.fillStyle = "rgb(20,20,20)";
-	ctx.rect(0, 0, canvasWidth, canvasHeight);
-	ctx.fill();
+	ctx.clearRect(0,0, canvas.width, canvas.height);
 
 	// Draw conections
 	ctx.shadowBlur = 1;
 	ctx.lineWidth = 0.5;
-	ctx.strokeStyle = "rgb(100,100,100)";
+	ctx.strokeStyle = "#ff90bd";
 	for (let dot of points){
 		let count = 3;
 		let dist = 0;
@@ -184,7 +181,7 @@ function Draw(){
 				ctx.moveTo(dot.position.x, dot.position.y);
 				ctx.lineTo(other.position.x, other.position.y);
 				ctx.stroke();
-				
+
 				count--;
 				if (count < 1){
 					break;
@@ -213,7 +210,7 @@ canvas.resize = function(){
 	canvas.width = canvasWidth;
 	canvas.height = canvasHeight;
 
-	let population = Math.floor(canvas.width * canvas.height / 10000);
+	let population = Math.floor(canvas.width * canvas.height / 20000);
 	if (population < points.length){
 		points.length = population;
 	}else{
