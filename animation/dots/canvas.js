@@ -80,7 +80,7 @@ class Point{
 		// Get the desired direction
 		let aim = new Vector(0,0);
 		avg.normalize();
-		avg.multiply(1);
+		// avg.multiply(1);
 		aim.add(avg);
 
 		align.normalize();
@@ -88,7 +88,7 @@ class Point{
 		aim.add(align);
 
 		avoid.normalize();
-		avoid.multiply(1);
+		// avoid.multiply(1);
 		aim.add(avoid);
 
 		aim.normalize();
