@@ -113,11 +113,6 @@ function BuildIndexPage(){
 		`<head>${head}<title>Index</title></head><body>${header}${body}${footer}</body>`,
 		'utf8'
 	);
-	fs.writeFileSync(
-		'./../index.html',
-		`<head>${head}<title>Index</title></head><body>${header}${body}${footer}</body>`,
-		'utf8'
-	);
 }
 function BuildIndexJSON(){
 	fs.writeFileSync(

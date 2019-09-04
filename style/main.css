@@ -17,7 +17,8 @@ body{
 	margin: 0px;
 	margin-top: 45px;
 
-	--color-primary: #d81b60;
+	--color-primary: rgb(216, 27, 96);
+	--color-primary-raw: 216, 27, 96;
 	--color-secondary: #ff5c8d; 
 }
 
