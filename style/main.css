@@ -1,3 +1,13 @@
+@import url(article.css);
+@import url(snippet.css);
+@import url(footer.css);
+@import url(head.css);
+
+
+html {
+  scroll-behavior: smooth;
+}
+
 body{
 	word-wrap: break-word;
 	font-family: "Segoe UI",Helvetica,Arial,sans-serif;
@@ -5,6 +15,7 @@ body{
 	font-size: 16px;
 
 	margin: 0px;
+	margin-top: 45px;
 
 	--color-primary: #d81b60;
 	--color-secondary: #ff5c8d; 

@@ -1,66 +1,30 @@
 <head>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="theme-color" content="#d81b60">
-
+		
 	<link rel="stylesheet" type="text/css" href="/style/main.css">
-	<link rel="stylesheet" type="text/css" href="/style/head.css">
-	<link rel="stylesheet" type="text/css" href="/style/footer.css">
-	<link rel="stylesheet" type="text/css" href="/style/article.css">
-	<link rel="stylesheet" type="text/css" href="/style/snippet.css">
+	<script src="/script/main.js"></script>
 
 	<style>
-		body{
-			margin: 37px 0px 0px 0px;
+		body {
+			margin: 0px;
+			overflow-x: hidden;
 		}
 
-		.heroBanner{
-			position: relative;
-			left: 0px;
+		.banner {
 			width: 100vw;
+			height: 100vh;
 
-			height: 800px;
-
-
-			margin: 0px;
-			border: none;
-		}
-
-		@media only screen and (max-height: 800px){
-			.heroBanner{
-				height: calc(100vh - 37px);
-			}
-		}
-
-		@media only screen and (max-height: 500px){
-			.heroBanner{
-				height: 500px;
-			}
-		}
-
-		.heroBanner iframe{
-			position: absolute;
-			top: 0px;
-			left: 0px;
-			width: 100%;
-			height: 100%;
-			bottom: 0px;
-			margin: 0px;
-			border: none;
-
-			z-index: 0;
+			filter: blur(0px);
 		}
 
 		.overlay{
-			position: absolute;
-			right: 0px;
-			bottom: 0px;
-
 			z-index: 2;
-
-			margin: 50px;
-			padding: 20px;
 			background-color: rgba(255,255,255, 0.8);
 			box-shadow: 0px 0px 20px 0px rgba(255, 92, 141, 0.5);
+
+			transition-property: box-shadow;
+			transition-duration: 0.3s;
 		}
 		.overlay::before{
 			content: '';
@@ -72,6 +36,9 @@
 			left: 0;
 			filter: blur(20px);
 			z-index: 1;
+		}
+		.overlay:hover{
+			box-shadow: 0px 0px 25px 0px rgba(255, 92, 141, 0.8);
 		}
 
 		.overlay .inner{
@@ -86,7 +53,77 @@
 
 			display: inline-block;
 		}
+
+		iframe.background {
+			border: none;
+
+			position: absolute;
+			top: 0px;
+			right: 0px;
+
+			width: 100%;
+			height: 100%;
+		}
+
+		.profile {
+			position: absolute;
+			right: 0px;
+			top: 30px;
+
+			margin: 50px;
+			padding: 20px;
+		}
+
+		.details{
+			position: absolute;
+			left: 10px;
+			top: 100vh;
+		}
+
+
+		.jump {
+			position: absolute;
+
+			bottom: 10px;
+			left: 50%;
+
+			cursor: pointer;
+
+			padding: 8px 10px 12px 10px;
+
+			border-radius: 100%;
+
+			background-color: white;
+
+			filter: opacity(100%);
+
+			transition-property: filter;
+			transition-duration: 1s;
+		}
+		body[scrolled=true] .jump:hover, .jump:hover{
+			filter: opacity(100%);
+		}
+		body[scrolled=true] .jump{
+			filter: opacity(15%);
+		}
+
+		.downArrow{
+			border: solid var(--color-primary);
+			border-width: 0 3px 3px 0;
+			display: inline-block;
+			padding: 5px;
+
+			transform: rotate(45deg);
+  		-webkit-transform: rotate(45deg);
+		}
 	</style>
+	<script>
+		window.addEventListener('load', ()=>{
+			document.getElementById("jump").onclick = ()=>{
+				document.body.scrollTo(0, window.innerHeight - 40);
+			}
+		});
+	</script>
 </head>
 <body>
 	<header>
@@ -95,8 +132,8 @@
 		<a href="/p/me.html" style="float: right;">Ajani James Bilby</a>
 	</header>
 
-	<div class="heroBanner">
-		<div class="overlay">
+	<div id="banner" class="banner">
+		<div class="overlay profile">
 			<h1 style="margin: 0px 0px 10px 0px; border: none">Ajani James Bilby</h1>
 
 			<div class="inner">
@@ -105,15 +142,32 @@
 					Content
 				</div>
 			</div>
+			
 		</div>
 
-		<iframe id="heroBanner" src="./animation/dots/index.html" style="z-index: 0">
+		<iframe class="background" src="./animation/dots/index.html" style="z-index: 0">
 		</iframe>
+
+		<div id="jump" class="overlay jump">
+			<div class="downArrow"></div>
+		</div>
 	</div>
 
-	<!-- <div id="overlay">
-		<div class="wrapper">
-			<h1>Ajani James Bilby</h1>
-		</div>
-	</div> -->
+	<div class="wrapper">
+		<p>
+			Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Iaculis urna id volutpat lacus laoreet non. Ac turpis egestas sed tempus urna et pharetra pharetra. Felis imperdiet proin fermentum leo vel orci. Non quam lacus suspendisse faucibus interdum posuere lorem ipsum. Cursus metus aliquam eleifend mi in nulla posuere. Tristique senectus et netus et. Tincidunt lobortis feugiat vivamus at augue. Vestibulum morbi blandit cursus risus. Commodo elit at imperdiet dui accumsan sit amet nulla facilisi. Mi sit amet mauris commodo quis imperdiet massa. Augue mauris augue neque gravida in.
+		</p>
+		<p>
+			Feugiat in ante metus dictum at tempor commodo. Varius quam quisque id diam vel. Ut porttitor leo a diam sollicitudin tempor. Nibh sed pulvinar proin gravida hendrerit lectus a. Rhoncus est pellentesque elit ullamcorper. Blandit volutpat maecenas volutpat blandit aliquam etiam erat. Ut porttitor leo a diam sollicitudin tempor id eu nisl. Enim praesent elementum facilisis leo vel fringilla est ullamcorper. Parturient montes nascetur ridiculus mus mauris. Vulputate eu scelerisque felis imperdiet proin fermentum leo. Cras sed felis eget velit aliquet sagittis id. Velit scelerisque in dictum non consectetur a. Consectetur a erat nam at. Et malesuada fames ac turpis egestas. Odio morbi quis commodo odio aenean. Neque egestas congue quisque egestas.
+		</p>
+		<p>
+			Tellus elementum sagittis vitae et leo duis ut. Tincidunt dui ut ornare lectus sit. Blandit cursus risus at ultrices mi tempus imperdiet. In tellus integer feugiat scelerisque varius morbi. Et tortor at risus viverra. Laoreet non curabitur gravida arcu ac. Morbi enim nunc faucibus a. Nec feugiat in fermentum posuere. Nulla malesuada pellentesque elit eget. Eu sem integer vitae justo eget magna fermentum iaculis eu. Vel pretium lectus quam id leo in vitae. Eu consequat ac felis donec et odio pellentesque diam volutpat. In fermentum posuere urna nec tincidunt praesent semper feugiat.
+		</p>
+		<p>
+			Hendrerit gravida rutrum quisque non. Pretium nibh ipsum consequat nisl vel pretium lectus quam id. Pharetra convallis posuere morbi leo urna molestie at elementum eu. Vitae suscipit tellus mauris a diam maecenas sed enim ut. Aliquet enim tortor at auctor urna nunc id. Pharetra vel turpis nunc eget lorem dolor sed viverra ipsum. Lacus luctus accumsan tortor posuere ac ut consequat semper viverra. Diam phasellus vestibulum lorem sed risus ultricies. Eget nunc scelerisque viverra mauris in. Sit amet venenatis urna cursus eget nunc scelerisque viverra. Viverra suspendisse potenti nullam ac tortor vitae purus. Feugiat nisl pretium fusce id velit ut tortor. Consectetur adipiscing elit ut aliquam purus sit. Cras semper auctor neque vitae tempus quam pellentesque nec. Nulla malesuada pellentesque elit eget. Sit amet tellus cras adipiscing enim eu. Mauris commodo quis imperdiet massa tincidunt nunc. Mus mauris vitae ultricies leo integer malesuada.
+		</p>
+		<p>
+			Lorem dolor sed viverra ipsum nunc aliquet bibendum enim facilisis. Mollis nunc sed id semper risus in hendrerit gravida. Ornare aenean euismod elementum nisi quis. Vitae aliquet nec ullamcorper sit amet. Lorem ipsum dolor sit amet consectetur adipiscing elit ut aliquam. Nibh venenatis cras sed felis eget velit aliquet sagittis id. Libero nunc consequat interdum varius sit amet mattis. Et tortor at risus viverra adipiscing at in tellus integer. Fringilla est ullamcorper eget nulla facilisi etiam dignissim diam. Suspendisse interdum consectetur libero id faucibus nisl tincidunt eget nullam. Nulla facilisi nullam vehicula ipsum. Turpis egestas maecenas pharetra convallis posuere morbi leo urna molestie.
+		</p>
+	</div>
 </body>
