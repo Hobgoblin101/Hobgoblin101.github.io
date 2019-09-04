@@ -1,7 +1,7 @@
-@import url(article.css);
-@import url(snippet.css);
-@import url(footer.css);
-@import url(head.css);
+@import url("article.css");
+@import url("snippet.css");
+@import url("footer.css");
+@import url("head.css");
 
 
 html {
