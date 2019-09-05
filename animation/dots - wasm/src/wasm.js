@@ -33,7 +33,7 @@ intData  [7] = intData[6]/1;
 floatData[8] = 0.1;
 floatData[9] = 0.005;
 
-loadWasm('./../bin/code.wasm', {
+loadWasm('./bin/code.wasm', {
 	env: {
 		mem: memory,
 		drawBoid: DrawBoid,
