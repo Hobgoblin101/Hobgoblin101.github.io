@@ -46,12 +46,12 @@ function Tick(){
 		dt = 41;
 	}
 
-	// let res = WasmGetSpeeds();
-	// res.mov += (Math.random() - 0.5)*dt*0.0001;
-	// res.mov = Math.min(0.1, Math.max(res.mov, -0.1));
-	// res.turn += (Math.random() - 0.5)*dt*0.0001;
-	// res.turn = Math.min(0.01, Math.max(res.turn, -0.01));
-	// WasmSetSpeeds(res.mov, res.turn);
+	let res = WasmGetSpeeds();
+	res.mov += (Math.random() - 0.5)*dt*0.0001;
+	res.mov = Math.min(0.1, Math.max(res.mov, -0.1));
+	res.turn += (Math.random() - 0.5)*dt*0.0001;
+	res.turn = Math.min(0.01, Math.max(res.turn, -0.01));
+	WasmSetSpeeds(res.mov, res.turn);
 
 	ctx.clearRect(0,0, canvas.width, canvas.height);
 
