@@ -26,6 +26,8 @@ window.addEventListener('load', ()=>{
 	document.getElementById('play-button').onclick = function(evt){
 		document.getElementById("inputSpace").style.display = "none";
 
+		CanvasResize();
+
 		audio.element.play();
 		audio.ctx.resume();
 
