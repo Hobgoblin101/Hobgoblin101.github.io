@@ -7,15 +7,9 @@
 		<meta property="og:url" content="ajanibilby.dev/demo/music-sand/index.html" />
 
 		<script>
-			let densityBasedColour  = false;
-			let pointMovementSpeed  = 0.03;
-			let pointTurningSpeed   = 0.6;
-			let pointMaxConnections = 3;
 			let pointDensity        = 0.000045;
 			let randomStartPoint    = true;
-			let drawPoints          = true;
-			let drawConnections     = true;
-			let useOnlyClosestConnection = false;
+			let pointSize = 5;
 		</script>
 
 
@@ -37,10 +31,10 @@
 				<span>Point Density: </span><input type="number" value="0.000045" onchange="pointDensity = this.value">
 			</div>
 			<div>
-				<span>Density Based Colour: </span><input type="checkbox" onchange="densityBasedColour = this.checked">
+				<span>Start Points Center: </span><input type="checkbox" onchange="randomStartPoint = !this.checked">
 			</div>
 			<div>
-				<span>Start Points Center: </span><input type="checkbox" onchange="randomStartPoint = !this.checked">
+				<span>Point Size: </span><input type="number" value="5" min="0" onchange="pointSize = this.value">
 			</div>
 			<div>
 				<span>Draw Connections by proxmitiy: </span><input type="checkbox" checked onchange="useOnlyClosestConnection = this.checked">

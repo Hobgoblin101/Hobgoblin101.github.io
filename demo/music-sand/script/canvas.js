@@ -7,14 +7,14 @@ function DrawParticle(x, y, height=1.0, speed=1.0){
 
 	// console.log(x, y, height);
 
-	ctx.shadowBlur = 20*height;
+	ctx.shadowBlur = pointSize*height*2;
 	ctx.shadowColor = color;
 	ctx.strokeStyle = color;
 	ctx.fillStyle = color;
 	ctx.beginPath();
 	ctx.arc(
 		x, y,
-		10*height,
+		pointSize*height,
 		0, 2*Math.PI
 	);
 	ctx.fill();
