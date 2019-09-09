@@ -7,7 +7,7 @@ async function loadWasm(path, importObj) {
 
 
 const memory = new WebAssembly.Memory({
-	initial: 1,
+	initial: 2,
 	maximum: 2
 });
 
@@ -24,7 +24,7 @@ iSettings[2] = 0;      // canvas height
 fSettings[3] = 1.2;    // avoid factor
 iSettings[4] = 30000;  // avoid range^2
 fSettings[5] = 0.1;   // movement speed
-iSettings[6] = 64;     // frequencies count
+iSettings[6] = 16;     // frequencies count
 iSettings[7] = Math.sqrt(iSettings[6]);
 
 const freqData = new Uint8Array(memory.buffer,
@@ -85,7 +85,10 @@ window.addEventListener('load', ()=>{
 			strucParticle: 8,
 
 			log: console.log,
-			DrawParticle: DrawParticle
+			DrawParticle: DrawParticle,
+
+			sin: Math.sin,
+			cos: Math.cos
 		}
 	}).then(instance => {
 		WasmUpdate = instance.exports['update'];

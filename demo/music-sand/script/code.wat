@@ -17,6 +17,16 @@
 		(func $logf2 (param f32) (param f32))
 	)
 
+
+	(import "env" "sin"
+		(func $MathSin (param f32) (result f32))
+	)
+	(import "env" "cos"
+		(func $MathCos (param f32) (result f32))
+	)
+
+
+
 	(import "env" "DrawParticle"
 		(func $DrawParticle (param i32) (param i32) (param f32) (param f32))
 	)
@@ -87,6 +97,13 @@
 			(f32.const 256)
 		))
 
+		;; (if (i32.ge
+		;; 	(get_local $index)
+		;; 	(i32.load (get_local $posHeader) (i32.const 24))
+		;; ) (then
+		;; 	(call $logi2 (get_local $index) (get_local $freq))
+		;; ))
+
 		(return (get_local $freq))
 	)
 
@@ -139,6 +156,8 @@
 		(param $particleID i32)
 
 		(local $height f32)
+		(local $locX i32)
+		(local $locY i32)
 		(local $velX f32)
 		(local $velY f32)
 
@@ -154,21 +173,29 @@
 		(local $tY i32)
 
 
+		;; Load point position
+		(set_local $locX (i32.load (get_local $particlePtr)))
+		(set_local $locY (i32.load (i32.add (get_local $particlePtr) (i32.const 4))))
+
+
 		;; Down scale location to frequency grid (round down)
 		(set_local $tX (i32.div_u
-			(i32.load (get_local $particlePtr))
+			(get_local $locX)
 			(i32.div_u
 				(i32.load (i32.add (get_global $posHeader) (i32.const 4)) )
 				(i32.load (i32.add (get_global $posHeader) (i32.const 28)) )
 			)
 		))
 		(set_local $tY (i32.div_u
-			(i32.load (i32.add (get_local $particlePtr) (i32.const 4) ))
+			(get_local $locY)
 			(i32.div_u
 				(i32.load (i32.add (get_global $posHeader) (i32.const 8)) )
 				(i32.load (i32.add (get_global $posHeader) (i32.const 28)) )
 			)
 		))
+
+
+		;; tX/Y is the quad the point is in
 
 		;; Get frequency quad
 		(set_local $freqA (call $GetFreqFromCoord
@@ -188,14 +215,44 @@
 			(i32.add (get_local $tY) (i32.const 1))
 		))
 
-		;; Offset from freq quad as percent
+
+
+		;; Offset in freq quad as int
+		(set_local $tX (i32.sub
+			(get_local $locX)
+			(i32.mul
+				(get_local $tX)
+				(i32.div_u
+					(i32.load (i32.add (get_global $posHeader) (i32.const 4)) )
+					(i32.load (i32.add (get_global $posHeader) (i32.const 28)) )
+				)
+			)
+		))
+		(set_local $tY (i32.sub
+			(get_local $locY)
+			(i32.mul
+				(get_local $tY)
+				(i32.div_u
+					(i32.load (i32.add (get_global $posHeader) (i32.const 8)) )
+					(i32.load (i32.add (get_global $posHeader) (i32.const 28)) )
+				)
+			)
+		))
+
+		;; Offset in freq quad as percent
 		(set_local $offX (f32.div
 			(f32.convert_s/i32 (get_local $tX))
-			(f32.convert_s/i32 (i32.load (i32.add (get_global $posHeader) (i32.const 28)) ))
+			(f32.div
+				(f32.convert_s/i32 (i32.load (i32.add (get_global $posHeader) (i32.const 4))  )) ;; canvas width
+				(f32.convert_s/i32 (i32.load (i32.add (get_global $posHeader) (i32.const 28)) )) ;; number of quads in row
+			)
 		))
 		(set_local $offY (f32.div
 			(f32.convert_s/i32 (get_local $tY))
-			(f32.convert_s/i32 (i32.load (i32.add (get_global $posHeader) (i32.const 28)) ))
+			(f32.div
+				(f32.convert_s/i32 (i32.load (i32.add (get_global $posHeader) (i32.const 8))  )) ;; canvas height
+				(f32.convert_s/i32 (i32.load (i32.add (get_global $posHeader) (i32.const 28)) )) ;; number of quads in row
+			)
 		))
 
 		;; Get height
@@ -241,45 +298,35 @@
 
 
 		;; Apply movement speed
-		;; (set_local $velX (f32.mul
-		;; 	(f32.load (i32.add (get_global $posHeader) (i32.const 20)))
-		;; 	(f32.mul
-		;; 		(get_local $velX)
-		;; 		(get_local $dt)
-		;; 	)
-		;; ))
-		;; (set_local $velY (f32.mul
-		;; 	(f32.load (i32.add (get_global $posHeader) (i32.const 20)))
-		;; 	(f32.mul
-		;; 		(get_local $velY)
-		;; 		(get_local $dt)
-		;; 	)
-		;; ))
+		(set_local $velX (f32.mul
+			(f32.load (i32.add (get_global $posHeader) (i32.const 20)))
+			(f32.mul
+				(get_local $velX)
+				(get_local $dt)
+			)
+		))
+		(set_local $velY (f32.mul
+			(f32.load (i32.add (get_global $posHeader) (i32.const 20)))
+			(f32.mul
+				(get_local $velY)
+				(get_local $dt)
+			)
+		))
 
 
 		;; Move particles
-		(set_local $tX ( i32.add
-			( i32.load (get_local $particlePtr)   )
-			( i32.trunc_s/f32 (get_local $velX) )
+		(set_local $locX ( i32.add
+			(get_local $locX)
+			(i32.trunc_s/f32 (get_local $velX))
 		))
-		(set_local $tY ( i32.add
-			(i32.load (i32.add (get_local $particlePtr) (i32.const 4) ))
-			( i32.trunc_s/f32 (get_local $velY) )
-		))
+		;; (set_local $locY ( i32.add
+		;; 	(get_local $locY)
+		;; 	(i32.trunc_s/f32 (get_local $velY))
+		;; ))
+
+
 
 		;; Wrap particles around the screen
-
-
-		;; Write new particle positions
-		(i32.store
-			(get_local $particlePtr)
-			(get_local $tX)
-		)
-		(i32.store
-			(i32.add (get_local $particlePtr) (i32.const 4))
-			(get_local $tY)
-		)
-
 
 		;; travelled off left side of the screen
 		;; (if (i32.gt_s
@@ -309,6 +356,18 @@
 		;; ) (then
 		;; 	(set_local $tY (i32.load (i32.add (get_global $posHeader) (i32.const 8))))
 		;; ))
+
+
+
+		;; Write new particle positions
+		(i32.store
+			(get_local $particlePtr)
+			(get_local $locX)
+		)
+		(i32.store
+			(i32.add (get_local $particlePtr) (i32.const 4))
+			(get_local $locY)
+		)
 
 
 		(call $DrawParticle
