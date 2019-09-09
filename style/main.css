@@ -19,7 +19,7 @@ body{
 
 	--color-primary: rgb(216, 27, 96);
 	--color-primary-raw: 216, 27, 96;
-	--color-secondary: #ff5c8d; 
+	--color-secondary: #ff5c8d;
 }
 
 
@@ -27,6 +27,8 @@ body{
 h1{
 	margin-top: 26px;
 	margin-bottom: 30px;
+
+	padding-left: 10px;
 
 	color: #24292e;
 
@@ -42,12 +44,19 @@ h1:hover{
 	border-bottom-width: 5px;
 	margin-bottom: 27px;
 }
+@media (max-width: 700px){
+	h1 {
+		text-align: center;
+	}
+}
+
 h2{
 	color: #24292e;
 
 	border-bottom: 1px solid var(--color-secondary);
 
 	margin: 19px 0px;
+	padding-left: 5px;
 
 	font-weight: 600;
 	font-size: 1.5em;
@@ -59,6 +68,7 @@ h2:hover{
 	border-bottom-width: 3px;
 	margin-bottom: 17px;
 }
+
 h3{
 	font-size: 1.25em;
 	color: #24292e;
