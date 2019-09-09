@@ -1,0 +1,50 @@
+<html>
+	<head>
+			<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+		<title>Particle Music Visualisation</title>
+		<meta property="og:title" content="Particle Music Visualisation" />
+		<meta property="og:type" content="text/html" />
+		<meta property="og:description" content="A particle based music visualisation" />
+		<meta property="og:url" content="ajanibilby.dev/demo/music-sand/index.html" />
+
+		<script>
+			let pointDensity        = 0.000045;
+			let randomStartPoint    = true;
+			let pointSize = 5;
+		</script>
+
+
+		<script src="./script/audio.js"></script>
+		<script src="./script/canvas.js"></script>
+		<script src="./script/wasm.js"></script>
+
+	</head>
+	<body style="margin: 0px">
+
+		<canvas id="heroBanner"></canvas>
+		<div id="overlay" style="position: absolute; top:0px; left:0px; right:0px; bottom:0px; box-shadow: inset 0px 0px 50px 0px black;"></div>
+
+		<div id="inputSpace" style="z-index: 3; position: absolute; top:0px; left:0px; background-color:white;">
+			<div>
+				<input type="file" id="audio" onchange="playFile(this)"/>
+			</div>
+			<div>
+				<span>Point Density: </span><input type="number" value="0.000045" onchange="pointDensity = this.value">
+			</div>
+			<div>
+				<span>Start Points Center: </span><input type="checkbox" onchange="randomStartPoint = !this.checked">
+			</div>
+			<div>
+				<span>Point Size: </span><input type="number" value="5" min="0" onchange="pointSize = this.value">
+			</div>
+			<div>
+				<span>Draw Connections by proxmitiy: </span><input type="checkbox" checked onchange="useOnlyClosestConnection = this.checked">
+			</div>
+			<div>
+				<audio id="sound" style="display: none" controls autostart="0"></audio>
+				<button id="play-button" disabled>Start</button>
+			</div>
+		</div>
+	</body>
+</html>
