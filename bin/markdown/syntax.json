@@ -1,0 +1,212 @@
+{
+	"rules": [
+		{
+			"name": "header 6",
+			"start": {
+				"match": "###### ",
+				"preamble": "<a name='%index%' class='target' href='#%index%' style='text-decoration:none;'><h6>",
+				"stack": "</a></h6>",
+				"newline": true,
+				"pop": -1
+			},
+			"end": {
+				"match": "\n",
+				"pop": 0
+			}
+		}, {
+			"name": "header 5",
+			"start": {
+				"match": "##### ",
+				"preamble": "<a name='%index%' class='target' href='#%index%' style='text-decoration:none;'><h5>",
+				"stack": "</a></h5>",
+				"newline": true,
+				"pop": -1
+			},
+			"end": {
+				"match": "\n",
+				"pop": 0
+			}
+		}, {
+			"name": "header 4",
+			"start": {
+				"match": "#### ",
+				"preamble": "<a name='%index%' class='target' href='#%index%' style='text-decoration:none;'><h4>",
+				"stack": "</h4></a>",
+				"newline": true,
+				"pop": -1
+			},
+			"end": {
+				"match": "\n",
+				"pop": 0
+			}
+		}, {
+			"name": "header 3",
+			"start": {
+				"match": "### ",
+				"preamble": "<a name='%index%' class='target' href='#%index%' style='text-decoration:none;'><h3>",
+				"stack": "</h3></a>",
+				"newline": true,
+				"pop": -1
+			},
+			"end": {
+				"match": "\n",
+				"pop": 0
+			}
+		}, {
+			"name": "header 2",
+			"start": {
+				"match": "## ",
+				"preamble": "<a name='%index%' class='target' href='#%index%' style='text-decoration:none;'><h2>",
+				"stack": "</h2></a>",
+				"newline": true,
+				"pop": -1
+			},
+			"end": {
+				"match": "\n",
+				"pop": 0
+			}
+		}, {
+			"name": "header 1",
+			"start": {
+				"match": "# ",
+				"preamble": "<a name='%index%' class='target' href='#%index%' style='text-decoration:none;'><h1>",
+				"stack": "</h1></a>",
+				"newline": true,
+				"pop": -1
+			},
+			"end": {
+				"match": "\n",
+				"pop": 0
+			}
+		},
+
+
+
+		{
+			"name": "paragraph",
+			"start": {
+				"match": "\n",
+				"newline": true,
+				"pop": -1
+			},
+			"end": {
+				"match": ""
+			}
+		}, {
+			"name": "new line",
+			"start": {
+				"match": "  \n",
+				"preamble": "<br>"
+			},
+			"end": {
+				"match": "",
+				"pop": 0
+			}
+		},
+
+
+		{
+			"name": "bold-italics",
+			"start": {
+				"match": "***",
+				"preamble": "<i><b>",
+				"stack": "</b></i>"
+			},
+			"end": {
+				"match": "***"
+			}
+		},{
+			"name": "bold",
+			"start": {
+				"match": "**",
+				"preamble": "<b>",
+				"stack": "</b>"
+			},
+			"end": {
+				"match": "**"
+			}
+		},{
+			"name": "italics",
+			"start": {
+				"match": "*",
+				"preamble": "<i>",
+				"stack": "</i>"
+			},
+			"end": {
+				"match": "*"
+			}
+		},{
+			"name": "strike-through",
+			"start": {
+				"match": "~~",
+				"preamble": "<del>",
+				"stack": "</del>"
+			},
+			"end": {
+				"match": "~~"
+			}
+		},{
+			"name": "spoiler",
+			"start": {
+				"match": "||",
+				"preamble": "<spoiler>",
+				"stack": "</spoiler>"
+			},
+			"end": {
+				"match": "||"
+			}
+		},
+
+		{
+			"name": "code",
+			"start": {
+				"match": "```",
+				"preamble": "",
+				"stack": "",
+				"newline": true
+			},
+			"inner-style": false,
+			"end": {
+				"match": "```"
+			}
+		}, {
+			"name": "snippet",
+			"start": {
+				"match": "``",
+				"preamble": "<code inline='true'>",
+				"stack": "</code>"
+			},
+			"inner-style": false,
+			"end": {
+				"match": "``"
+			}
+		},
+
+
+		{
+			"name": "blockquote",
+			"start": {
+				"match": "> ",
+				"preamble": "<blockquote>",
+				"stack": "</blockquote>",
+				"newline": true
+			},
+			"end": {
+				"match": "\n"
+			}
+		},
+
+		{
+			"name": "section-break",
+			"start": {
+				"match": "---\n",
+				"preamble": "<break>",
+				"stack": "</break>",
+				"newline": true
+			},
+			"end": {
+				"match": ""
+			}
+		}
+	]
+}

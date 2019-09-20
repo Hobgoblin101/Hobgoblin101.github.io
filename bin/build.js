@@ -1,4 +1,4 @@
-const markdown = require('./markdown.js');
+const markdown = require('./markdown/encode.js');
 const rss = require('./rss.js');
 const fs = require('fs');
 
@@ -61,7 +61,7 @@ function Compile(article){
 
 
 	body = `<h1>${metaData[i].title}</h1>`+markdown.encode(body);
-	body += '<span class="tags"><h6 style="display: inline-block;">Tags:</h6>'
+	body += '<span class="tags"><h6>Tags:</h6>'
 	for (tag of metaData[i].tags){
 		body += `<a href="/t/${tag}.html"><tag>${tag};</tag></a>`;
 	}
@@ -187,7 +187,7 @@ metaData = metaData.sort(function (a, b){
 		}else if (b.date){
 			return 1;
 		}
-		
+
 		return 0;
 	}
 

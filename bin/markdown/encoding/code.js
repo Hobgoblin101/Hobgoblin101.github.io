@@ -56,7 +56,7 @@ function encode(input){
 	loop: for (i=0; i<res.length; i++){
 		// Color single line comments
 		if (res[i] == '/' && res[i+1] == '/'){
-			
+
 			scan: for (j=i+2; j<res.length; j++){
 				if (res[j] === '\n'){
 					break scan;

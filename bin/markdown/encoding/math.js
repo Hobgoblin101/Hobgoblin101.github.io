@@ -28,7 +28,7 @@ trim = function(str){
 
 let opperator = [
 	'{', '}',
-	'\\\\', "\\", 
+	'\\\\', "\\",
 	'<=', '>=',
 	'>',  "<",
 	'!=', ':=', "=",
@@ -196,7 +196,7 @@ class Tokens{
 				}
 				out.push(`<span class="fraction" w="t"><span class="top">${prev}</span><span class="bottom">${nxt}</span></span>`);
 				i++;
-				
+
 				continue;
 			}
 
@@ -246,9 +246,6 @@ class Tokens{
 
 function encode(line, nested=false){
 	let r = new Tokens(line);
-	console.log(r);
-
-	console.log(r.toHTML());
 	return r.toHTML();
 }
 
