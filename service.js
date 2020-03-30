@@ -26,7 +26,7 @@ self.addEventListener('fetch', function(event) {
 async function CheckUpdate() {
 	console.log('Check cache update');
 	let currVer = await GetCacheVersion();
-	if (self.cacheVersion == null || cacheVersion < currVer) {
+	if (!self.cacheVersion || cacheVersion < currVer) {
 		await RefreshCache();
 		self.cacheVersion = currVer;
 		self.nextUpdateCheck = Date.now() + 24*60*60*1000; // next day
