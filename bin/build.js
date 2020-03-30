@@ -59,6 +59,15 @@ function Compile(article){
 		}
 	}
 
+	if (metaData[i].unlisted && metaData[i].unlisted[0] == 't'){
+		metaData.length = i; // remove this element
+	}else{
+		metaData[i].name = article;
+		metaData[i].blurb = markdown.encode(blurb);
+		metaData[i].rawBlurb = blurb;
+	}
+
+	return;
 
 	body = `<h1>${metaData[i].title}</h1>`+markdown.encode(body);
 	body += '<span class="tags"><h6 style="display: inline-block;">Tags:</h6>'
@@ -68,18 +77,10 @@ function Compile(article){
 	body += '</span>';
 
 	fs.writeFileSync(
-		'./../p/'+article+'.html',
+		'./../p?'+article+'.html',
 		`<!DOCTYPE html><html><head><title>${metaData[i].title}</title>${head}</head><body>${header}<div class="wrapper">${body}</div>${footer}</body></html>`,
 		'utf8'
 	);
-
-	if (metaData[i].unlisted && metaData[i].unlisted[0] == 't'){
-		metaData.length = i; // remove this element
-	}else{
-		metaData[i].name = article;
-		metaData[i].blurb = markdown.encode(blurb);
-		metaData[i].rawBlurb = blurb;
-	}
 }
 
 
@@ -92,7 +93,7 @@ function BuildIndexPage(){
 		body += '<article>';
 
 		body += `<div class="meta">`
-		body += `<a href="/p/${entry.name}.html"><h3>${entry.title}</h3></a>`;
+		body += `<a href="/p?${entry.name}"><h3>${entry.title}</h3></a>`;
 		body += `<span class="date">${entry.date}</span>`;
 		body += `</div>`
 		// body += `<span class="author">${entry.author}</span>`;
@@ -133,7 +134,7 @@ function BuildTagPage(tag){
 		body += '<article>';
 
 		body += `<div class="meta">`
-		body += `<a href="/p/${entry.name}.html"><h3>${entry.title}</h3></a>`;
+		body += `<a href="/p?${entry.name}"><h3>${entry.title}</h3></a>`;
 		body += `<span class="date">${entry.date}</span>`;
 		body += `</div>`
 		// body += `<span class="author">${entry.author}</span>`;

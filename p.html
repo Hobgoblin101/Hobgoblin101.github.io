@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<script>
+			if (navigator.serviceWorker) {
+				navigator.serviceWorker.register('/service.js', {scope: '/'})
+				.then((reg) => {
+					// registration worked
+					console.log('Registration succeeded. Scope is ' + reg.scope);
+				}).catch((error) => {
+					// registration failed
+					console.log('Registration failed with ' + error);
+				});
+			}
+		</script>
+
+	<title>Post -</title> 
+
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="theme-color" content="#d81b60">
+
+		<link rel="manifest" href="/manifest.webmanifest">
+		<link rel="stylesheet" type="text/css" href="/style/main.css">
+		<script src="/script/main.js"></script>
+
+		<script src="/script/encoding/markdown.js"></script>
+		<script src="/script/encoding/code.js"></script>
+		<script src="/script/encoding/math.js"></script>
+		<script src="/script/page/post.js"></script>
+	</head>
+	<body>
+		<header>
+			<a href="/index.html" style="float: left;">Home</a>
+			<a href="/feed.html" style="float: left;">Feed</a>
+			<a style="float: right;">Ajani James Bilby</a>
+		</header>
+
+		<div class="wrapper">
+			Loading...
+		</div>
+
+		<footer>
+			<a href="https://goo.gl/forms/8wgwU9mPZlKogDEn2">Feedback</a>
+			<a href="/feed.rss" style="float:right">RSS Feed</a>
+		</footer>
+	</body>
+</html>

@@ -4,3 +4,7 @@
 /style/main.css
 /style/snippet.css
 /script/main.js
+/script/post.js
+/script/encoding/code.js
+/script/encoding/markdown.js
+/script/encoding/math.js
