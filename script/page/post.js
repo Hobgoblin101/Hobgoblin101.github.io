@@ -25,7 +25,7 @@ async function BuildPage() {
 	// Description
 	i = raw.indexOf('---');
 	metadata.description = raw.slice(0, i-1);
-	metadata.body = raw.slice(i+5);
+	metadata.body = raw.slice(i+4);
 
 
 
