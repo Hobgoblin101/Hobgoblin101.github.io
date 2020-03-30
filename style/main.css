@@ -184,6 +184,11 @@ ul ul, ul ol, ol ul, ol ol{
 	}
 }
 
+.wrapper::before[loading=true] {
+	content: "loading...";
+	text-align: center;
+}
+
 
 
 

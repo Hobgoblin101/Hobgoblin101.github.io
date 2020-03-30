@@ -1,11 +1,12 @@
 window.addEventListener('load', ()=>{
-	let id = window.location.search.slice(1);
-	console.log('Loading...', id);
-	BuildPage(id);
+	BuildPage();
 });
 
 
-async function BuildPage(id) {
+async function BuildPage() {
+	let id = window.location.search.slice(1);
+	console.log('Loading...', id);
+
 	let req = await fetch(`/post/${id}.md`);
 	let raw = await req.text();
 
@@ -46,4 +47,6 @@ async function BuildPage(id) {
 	let temp = location.hash;
 	location.hash = "";
 	location.hash = temp;
+
+	setTimeout(BindLinks, 100);
 };
