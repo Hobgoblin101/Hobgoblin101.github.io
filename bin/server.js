@@ -1,30 +1,33 @@
 const fs = require('fs');
-const http = require('http');
+const passer = require('passer');
 
-const server = http.createServer((req, res)=>{
-	if (req.url == '/'){
-		req.url = '/index.html';
-	}
+passer.publicFolder = "./..";
+passer.listen(8080);
 
-	let path = './..'+req.url;
+// const server = http.createServer((req, res)=>{
+// 	if (req.url == '/'){
+// 		req.url = '/index.html';
+// 	}
 
-	fs.exists(path, (b)=>{
-		if (!b){
-			res.statusCode = 404;
-			res.end('Invalid path: '+path);
-			return;
-		}
+// 	let path = './..'+req.url;
 
-		// res.setHeader('content-type', 'text/html; charset=utf-8');
-		res.statusCode = 200;
-		let s = fs.createReadStream(path);
-		s.pipe(res);
-		s.on('end', ()=>{
-			s.close();
-		});
-	})
-});
+// 	fs.exists(path, (b)=>{
+// 		if (!b){
+// 			res.statusCode = 404;
+// 			res.end('Invalid path: '+path);
+// 			return;
+// 		}
 
-server.listen(8080, ()=>{
-	console.log(`Server running at http://localhost:8080`);
-})
+// 		// res.setHeader('content-type', 'text/html; charset=utf-8');
+// 		res.statusCode = 200;
+// 		let s = fs.createReadStream(path);
+// 		s.pipe(res);
+// 		s.on('end', ()=>{
+// 			s.close();
+// 		});
+// 	})
+// });
+
+// server.listen(8080, ()=>{
+// 	console.log(`Server running at http://localhost:8080`);
+// })

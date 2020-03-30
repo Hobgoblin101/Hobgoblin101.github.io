@@ -69,7 +69,7 @@ function Compile(article){
 
 	fs.writeFileSync(
 		'./../p/'+article+'.html',
-		`<head><title>${metaData[i].title}</title>${head}</head><body>${header}<div class="wrapper">${body}</div>${footer}</body>`,
+		`<!DOCTYPE html><html><head><title>${metaData[i].title}</title>${head}</head><body>${header}<div class="wrapper">${body}</div>${footer}</body></html>`,
 		'utf8'
 	);
 
@@ -110,7 +110,7 @@ function BuildIndexPage(){
 
 	fs.writeFileSync(
 		'./../feed.html',
-		`<head>${head}<title>Index</title></head><body>${header}${body}${footer}</body>`,
+		`<!DOCTYPE html><html><head>${head}<title>Index</title></head><body>${header}${body}${footer}</body></html>`,
 		'utf8'
 	);
 }
@@ -151,7 +151,7 @@ function BuildTagPage(tag){
 
 	return fs.writeFileSync(
 		`./../t/${tag}.html`,
-		`<head>${head}<title>Tag: ${tag}</title></head><body>${header}${body}${footer}</body>`,
+		`<!DOCTYPE html><html><head>${head}<title>Tag: ${tag}</title></head><body>${header}${body}${footer}</body></ntml>`,
 		'utf8'
 	);
 }
@@ -165,7 +165,7 @@ function BuildTagList(){
 
 	return fs.writeFileSync(
 		`./../tags.html`,
-		`<head>${head}<title>Tags</title></head><body>${header}${body}${footer}</body>`,
+		`<!DOCTYPE html><html><head>${head}<title>Tags</title></head><body>${header}${body}${footer}</body></html>`,
 		'utf8'
 	);
 }

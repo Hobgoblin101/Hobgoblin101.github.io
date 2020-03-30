@@ -1,0 +1,10 @@
+{
+  "name": "Ajani Bilby",
+  "short_name": "Ajani Bilby",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#d81b60",
+  "description": "Ajani James Bilby's blog",
+  "icons": [{}],
+  "related_applications": [{}]
+}

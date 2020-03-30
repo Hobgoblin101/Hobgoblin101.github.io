@@ -1,6 +1,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="theme-color" content="#d81b60">
 
+<link rel="manifest" href="/manifest.webmanifest">
+
+<script>
+	if (navigator.serviceWorker) {
+		navigator.serviceWorker.register('/service.js', {scope: '/'})
+		.then((reg) => {
+			// registration worked
+			console.log('Registration succeeded. Scope is ' + reg.scope);
+		}).catch((error) => {
+			// registration failed
+			console.log('Registration failed with ' + error);
+		});
+	}
+</script>
+
 <link rel="stylesheet" type="text/css" href="/style/main.css">
 
 <script src="/script/main.js"></script>
