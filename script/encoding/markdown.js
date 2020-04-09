@@ -1,5 +1,7 @@
 let Markdown = {};
 
+let global = "";
+
 (function(){
 	function encode(input,nested){
 		var t = input.replace(/\r\n/g, '\n'); //Remove OS obscurities
@@ -360,6 +362,43 @@ let Markdown = {};
 	
 		return t.replace(/<p><\/p>/g, '').replace(/<p>\n<\/p>/g, ''); //Clean up any failed paragraphs
 	}
+
+	let expression = {
+		header: new RegExp(/^([#]{1,}) ([A-z0-a]{1,})\w+/g),
+		list: new RegExp(/^(([\*]{1})|([a-z0-9]+[.)]{1})) ((?!\n\n)(.|\n))+\n\n/gimu),
+		table: new RegExp(/^\|((?!\n\n)(.|\n))*\n\n/gimu),
+		codeBlock: new RegExp(/^```((?!```)(.|\n))+```/gimu),
+		quote: new RegExp(/^> ((?!\n\n)(.|\n))+/gimu),
+		break: new RegExp(/^---\n/gimu),
+		snippet: new RegExp(/``(.)+``/gimu),
+		image: new RegExp(/\[(.+)\]\((.+)\)/giu),
+		attach: new RegExp(/^!\[(.+)\]\((.+)\)/gimu),
+		newline: new RegExp(/(  \n)/g),
+		underline: new RegExp(/_((?!_)(.))+_/giu),
+		bold: new RegExp(/\*\*((?!\*)(.))+\*\*/giu),
+		boldItalic: new RegExp(/\*\*\*((?!\*)(.))+\*\*\*/giu),
+		italic: new RegExp(/\*((?!\*)(.))+\*/giu),
+	}
+
+	function encodeRegex(input, nested=false) {
+		let t = input.replace(/\r\n/g, '\n');
+		let output = "";
+
+		if (!nested) {
+			global = input;
+		}
+
+		t.match(/\n# [*]{1,}\n/g);
+
+		console.log('OUTPUT', t.match(/\n# [*]{1,}\n/g));
+
+		if (!nested) {
+			output = `<p>${output}</p>`;
+		}
+
+		return output.replace(/<p><\/p>/g, "").replace(/<p>\n<\/p>/g, "");
+	}
+
 	Markdown.encode = encode;
 	
 	
