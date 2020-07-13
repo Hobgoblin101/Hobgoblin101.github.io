@@ -15,6 +15,7 @@ let dotColour = "#ff5c8d";
 let pointMovementSpeed = 0.1;
 let pointTurningSpeed = 0.4;
 let varyMovement = true;
+let density = 20000;
 
 
 
@@ -210,7 +211,7 @@ canvas.resize = function(){
 	canvas.width = canvasWidth;
 	canvas.height = canvasHeight;
 
-	let population = Math.floor(canvas.width * canvas.height / 20000);
+	let population = Math.floor(canvas.width * canvas.height / density);
 	if (population < points.length){
 		points.length = population;
 	}else{
