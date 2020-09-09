@@ -367,9 +367,7 @@ function Draw(){
 	}
 
 	// Clear the view
-	ctx.fillStyle = "rgb(0,0,0)";
-	ctx.rect(0, 0, canvasWidth, canvasHeight);
-	ctx.fill();
+	ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
 	if (drawConnections){
 		let warp = 50*(frequency**2);

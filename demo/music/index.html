@@ -10,9 +10,16 @@
 			let drawPoints          = true;
 			let drawConnections     = true;
 			let useOnlyClosestConnection = false;
+
+			window.addEventListener('load', ()=>{
+				console.log(window.location.search.includes('transparent'));
+				if (window.location.search.includes('transparent')) {
+					document.body.style['background-color'] = "transparent";
+				}
+			});
 		</script>
 	</head>
-	<body style="margin: 0px">
+	<body style="margin: 0px; background-color: black;">
 
 		<canvas id="heroBanner"></canvas>
 		<div id="overlay" style="position: absolute; top:0px; left:0px; right:0px; bottom:0px; box-shadow: inset 0px 0px 50px 0px black;"></div>

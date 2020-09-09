@@ -28,9 +28,7 @@ function Tick(){
 		point.update(dt);
 	}
 
-	ctx.fillStyle = "rgb(0,0,0)";
-	ctx.rect(0, 0, canvasWidth, canvasHeight);
-	ctx.fill();
+	ctx.clearRect(0, 0, canvasWidth, canvasHeight);
 
 	for (let point of points){
 		point.draw(dt);

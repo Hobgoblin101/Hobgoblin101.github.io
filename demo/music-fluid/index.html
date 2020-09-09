@@ -4,12 +4,19 @@
 			let pointDensity = 0.0001;
 			let pointTurningSpeed = 0;
 			let pointMovementSpeed = 0;
+
+			window.addEventListener('load', ()=>{
+				console.log(window.location.search.includes('transparent'));
+				if (window.location.search.includes('transparent')) {
+					document.body.style['background-color'] = "transparent";
+				}
+			});
 		</script>
 
 		<script src="./point.js"></script>
 		<script src="./vector.js"></script>
 	</head>
-	<body style="margin: 0px">
+	<body style="margin: 0px; background-color: black;">
 
 		<canvas id="heroBanner"></canvas>
 		<div id="overlay" style="position: absolute; top:0px; left:0px; right:0px; bottom:0px; box-shadow: inset 0px 0px 50px 0px black;"></div>
