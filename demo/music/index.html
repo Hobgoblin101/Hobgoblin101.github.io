@@ -9,7 +9,9 @@
 			let randomStartPoint    = true;
 			let drawPoints          = true;
 			let drawConnections     = true;
+			let pointGlow = true;
 			let useOnlyClosestConnection = false;
+			let pointScale = 1;
 
 			window.addEventListener('load', ()=>{
 				console.log(window.location.search.includes('transparent'));
@@ -32,6 +34,9 @@
 				<span>Point Density: </span><input type="number" value="0.000045" onchange="pointDensity = this.value">
 			</div>
 			<div>
+				<span>Point Scale: </span><input type="number" value="1" onchange="pointScale = this.value">
+			</div>
+			<div>
 				<span>Density Based Colour: </span><input type="checkbox" onchange="densityBasedColour = this.checked">
 			</div>
 			<div>
@@ -39,6 +44,9 @@
 			</div>
 			<div>
 				<span>Draw Points: </span><input type="checkbox" checked onchange="drawPoints = this.checked">
+			</div>
+			<div>
+				<span>Point Glow: </span><input type="checkbox" onchange="glow = this.checked" checked>
 			</div>
 			<div>
 				<span>Draw Connections: </span><input type="checkbox" checked onchange="drawConnections = this.checked">

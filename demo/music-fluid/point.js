@@ -9,8 +9,13 @@ class Point{
 		this.r = 10;               // Area
 		this.la = 0;               // Local amplitude
 
-		this.p.x = Math.random()*canvas.width;
-		this.p.y = Math.random()*canvas.height;
+		if (randomStartPoint) {
+			this.p.x = Math.random()*canvas.width;
+			this.p.y = Math.random()*canvas.height;
+		} else {
+			this.p.x = canvas.width / 2;
+			this.p.y = canvas.height / 2;
+		}
 
 		this.c = "hsl(0, 100%, 50%)";
 	};
@@ -27,7 +32,7 @@ Point.prototype.update = function(dt){
 
 
 	// Resize the particle acording to amplitude
-	this.r = 5*this.la;
+	this.r = 5*this.la * pointScale;
 	if (this.r <= 0){
 		this.r = 0;
 	}
@@ -44,10 +49,11 @@ Point.prototype.update = function(dt){
 		// Distance between the sides of points
 		t.x = (this.p.x - other.p.x - this.r - other.r);
 		t.y = (this.p.y - other.p.y - this.r - other.r);
-		t.setMagnitude( 1 / t.dist2() );
+		let influence = 1 / t.dist2();
+		t.setMagnitude( influence*influence );
 		avoid.add(t);
 	};
-	avoid.setMagnitude(0.8);
+	avoid.setMagnitude(avoidStrength);
 	if (!isFinite(avoid.x) || isNaN(avoid.x)){
 		avoid.x = 0;
 	}
@@ -110,8 +116,13 @@ Point.prototype.update = function(dt){
 
 Point.prototype.draw = function(){
 	// ctx.shadowBlur = 50*amplitude;
-	ctx.shadowBlur  = this.r*1.5;
-	ctx.shadowColor = this.c;
+	if (pointGlow) {
+		ctx.shadowBlur  = this.r*1.5;
+		ctx.shadowColor = this.c;
+	} else {
+		ctx.shadowBlur = 0;
+	}
+
 	ctx.strokeStyle = this.c;
 	ctx.fillStyle   = this.c;
 	ctx.beginPath();

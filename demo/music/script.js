@@ -172,10 +172,12 @@ class Point{
 		let avoid = new Vector(0,0);
 		let nxt = new Vector(0,0);
 		let dist = 0;
+		let selfSeen = false;
 		this.connections = [];
 		this.connectionDist = [];
 		for (let other of points){
 			if (other == this){
+				selfSeen = true;
 				continue;
 			}
 
@@ -188,8 +190,10 @@ class Point{
 				));
 				align.add(other.direction);
 
-				this.connections.push(other.position);
-				this.connectionDist.push(dist);
+				if (!selfSeen) {
+					this.connections.push(other.position);
+					this.connectionDist.push(dist);
+				}
 			}
 			if (dist < avoidRange){
 				nxt.x = this.position.x - other.position.x;
@@ -276,8 +280,13 @@ class Point{
 	};
 
 	drawPoint(){
-		ctx.shadowBlur = 50*amplitude;
-		ctx.shadowColor = this.color;
+		if (pointGlow) {
+			ctx.shadowBlur = 50*amplitude;
+			ctx.shadowColor = this.color;
+		} else {
+			ctx.shadowBlur = 0;
+		}
+
 		ctx.strokeStyle = this.color;
 		ctx.fillStyle = this.color;
 		ctx.beginPath();

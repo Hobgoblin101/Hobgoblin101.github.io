@@ -4,6 +4,10 @@
 			let pointDensity = 0.0001;
 			let pointTurningSpeed = 0;
 			let pointMovementSpeed = 0;
+			let randomStartPoint = true;
+			let pointGlow = true;
+			let avoidStrength = 0.8;
+			let pointScale = 1;
 
 			window.addEventListener('load', ()=>{
 				console.log(window.location.search.includes('transparent'));
@@ -29,6 +33,19 @@
 			<div>
 				<span>Point Density: </span><input type="number" value="0.000045" onchange="pointDensity = this.value">
 			</div>
+			<div>
+				<span>Point Scale: </span><input type="number" value="1" onchange="pointScale = this.value">
+			</div>
+			<div>
+				<span>Separation: </span><input type="number" value="0.8" onchange="avoidStrength = this.value">
+			</div>
+			<div>
+				<span>Point Glow: </span><input type="checkbox" onchange="glow = this.checked" checked>
+			</div>
+			<div>
+				<span>Start Points Center: </span><input type="checkbox" onchange="randomStartPoint = !this.checked">
+			</div>
+			<div>
 				<button id="playBtn">Start</button>
 				<audio style="display:none" id="sound" controls autostart="0"></audio>
 			</div>
