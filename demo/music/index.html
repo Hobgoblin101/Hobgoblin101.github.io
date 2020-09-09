@@ -13,7 +13,7 @@
 		</script>
 	</head>
 	<body style="margin: 0px">
-		
+
 		<canvas id="heroBanner"></canvas>
 		<div id="overlay" style="position: absolute; top:0px; left:0px; right:0px; bottom:0px; box-shadow: inset 0px 0px 50px 0px black;"></div>
 
@@ -43,7 +43,8 @@
 				<span>Draw Connections by proxmitiy: </span><input type="checkbox" checked onchange="useOnlyClosestConnection = this.checked">
 			</div>
 			<div>
-				<audio id="sound" controls autostart="0"></audio>
+				<button id="playBtn">Start</button>
+				<audio style="display:none;" id="sound" controls autostart="0"></audio>
 			</div>
 		</div>
 
