@@ -4,13 +4,12 @@
 let frequency  = 0;
 let amplitude  = 0;
 let audio = document.getElementById("sound");
-let audioContext = new AudioContext();
-let audioSrc = audioContext.createMediaElementSource(audio);
-let analyser = audioContext.createAnalyser();
-let frequencyData = new Uint8Array(analyser.frequencyBinCount);
+let playBtn = document.getElementById("playBtn");
+let audioContext = null;
+let audioSrc = null;
+let analyser = null;
+let frequencyData = null;
 let frequencies = [];
-
-audioSrc.connect(analyser);
 
 function AudioAnalysis(){
 	analyser.getByteFrequencyData(frequencyData);
@@ -28,16 +27,22 @@ function AudioAnalysis(){
 function playFile(elm){
 	let url = URL.createObjectURL(elm.files[0]);
 	audio.src=url;
-	analyser.connect(audioContext.destination);
 }
 
-audio.onplay = function(evt){
+playBtn.onclick = function(evt){
 	document.getElementById("inputSpace").style.display="none";
+
+	audioContext = new AudioContext();
+	audioSrc = audioContext.createMediaElementSource(audio);
+	analyser = audioContext.createAnalyser();
+	frequencyData = new Uint8Array(analyser.frequencyBinCount);
+	analyser.connect(audioContext.destination);
+	audioSrc.connect(analyser);
 
 	setTimeout(()=>{
 		audio.play();
 	}, 500);
-	
+
 	points.length = 0;
 	canvas.resize();
 	Tick();
